@@ -7,7 +7,7 @@ credit colinauyeung
 
 **How to Run the Program**
 1. Download "Journal.jar" on local machine
-2. Run the file.
+2. Double click to run the program.
 
 **Login Screen**
 1. Enter username.
