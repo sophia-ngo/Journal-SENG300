@@ -6,10 +6,8 @@ credit colinauyeung
 # Journal-SENG300
 
 **How to Run the Program**
-1. Download Git repository onto local machine.
-2. Open Eclipse.
-3. Load file into Eclipse.
-4. Run using the "Run" button at the top.
+1. Download "Journal.jar" on local machine
+2. Run the file.
 
 **Login Screen**
 1. Enter username.
