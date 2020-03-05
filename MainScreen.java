@@ -2,6 +2,9 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import java.awt.Font;
+import javax.swing.SwingConstants;
+
 public class MainScreen extends JPanel {
 
 	/**
@@ -10,16 +13,28 @@ public class MainScreen extends JPanel {
 	public MainScreen(JFrame frame, Account acc) {
 		setLayout(null);
 		
-		JLabel lblWelcome = new JLabel("Welcome to the UofC Journal Submission System!");
-		lblWelcome.setBounds(74, 117, 310, 16);
-		add(lblWelcome);
-		
-		JLabel lblName = new JLabel("HI! " + acc.getUsername());
-		lblName.setBounds(166, 145, 132, 16);
-		add(lblName);
-		
+
 		JLabel lblNewLabel = new JLabel(acc.getAccountType().getAccType() +  " Account");
 		lblNewLabel.setBounds(6, 6, 202, 16);
 		add(lblNewLabel);
+
+		JLabel lblWelcome = new JLabel("Welcome to the UofC\n");
+		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWelcome.setFont(new Font("LM Mono 10", Font.BOLD, 16));
+		lblWelcome.setBounds(133, 122, 184, 16);
+		add(lblWelcome);
+		
+		JLabel lblName = new JLabel("Hello, <dynamic>!");
+		lblName.setFont(new Font("LM Mono 10", Font.BOLD, 14));
+		lblName.setHorizontalAlignment(SwingConstants.CENTER);
+		lblName.setBounds(138, 170, 173, 16);
+		add(lblName);
+		
+		JLabel lblUofcJournalSubmission = new JLabel("Journal Submission System!");
+		lblUofcJournalSubmission.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUofcJournalSubmission.setFont(new Font("LM Mono 10", Font.BOLD, 16));
+		lblUofcJournalSubmission.setBounds(97, 144, 256, 16);
+		add(lblUofcJournalSubmission);
+
 	}
 }
