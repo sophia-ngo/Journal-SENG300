@@ -3,6 +3,8 @@ public class Account {
 	private String username;
 	
 	private String password;
+	
+	private AccountType accType;
 
 	public static boolean checkUsername(String username) {
 		if(username.length() <= 16) {
@@ -18,9 +20,10 @@ public class Account {
 		return false; 
 	}
 	
-	public Account(String user, String pass) {
+	public Account(String user, String pass, AccountType accType) {
 		this.username = user;
 		this.password = pass;
+		this.accType = accType;
 	}
 
 	protected String getUsername() {
@@ -45,6 +48,11 @@ public class Account {
 			return true;
 		}
 		return false;
+	}
+	
+	protected AccountType getAccountType()
+	{
+		return this.accType;
 	}
 
 }

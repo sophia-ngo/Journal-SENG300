@@ -15,7 +15,11 @@ public class MainScreen extends JPanel {
 		add(lblWelcome);
 		
 		JLabel lblName = new JLabel("HI! " + acc.getUsername());
-		lblName.setBounds(195, 145, 61, 16);
+		lblName.setBounds(166, 145, 132, 16);
 		add(lblName);
+		
+		JLabel lblNewLabel = new JLabel(acc.getAccountType().getAccType() +  " Account");
+		lblNewLabel.setBounds(6, 6, 202, 16);
+		add(lblNewLabel);
 	}
 }

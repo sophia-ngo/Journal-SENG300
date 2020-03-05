@@ -5,6 +5,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
 
 public class Register extends JPanel {
 	private JTextField newuserTEXT;
@@ -26,7 +27,7 @@ public class Register extends JPanel {
 		add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(71, 127, 77, 16);
+		lblPassword.setBounds(71, 118, 77, 16);
 		add(lblPassword);
 		
 		newuserTEXT = new JTextField();
@@ -35,16 +36,16 @@ public class Register extends JPanel {
 		newuserTEXT.setColumns(10);
 		
 		newpassTEXT = new JTextField();
-		newpassTEXT.setBounds(216, 122, 130, 26);
+		newpassTEXT.setBounds(216, 113, 130, 26);
 		add(newpassTEXT);
 		newpassTEXT.setColumns(10);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password");
-		lblConfirmPassword.setBounds(71, 177, 120, 16);
+		lblConfirmPassword.setBounds(71, 156, 120, 16);
 		add(lblConfirmPassword);
 		
 		confirmpassTEXT = new JTextField();
-		confirmpassTEXT.setBounds(216, 172, 130, 26);
+		confirmpassTEXT.setBounds(216, 151, 130, 26);
 		add(confirmpassTEXT);
 		confirmpassTEXT.setColumns(10);
 		
@@ -63,18 +64,29 @@ public class Register extends JPanel {
 		add(lblInvalidUsername);
 		lblInvalidUsername.setVisible(false);
 		
+		String[] Choices = {"Author", "Reviewer", "Editor"};
+		JComboBox AType = new JComboBox(Choices);
+		AType.setBounds(216, 184, 130, 27);
+		add(AType);
+		
+		JLabel lblAccountType = new JLabel("Account Type");
+		lblAccountType.setBounds(71, 188, 105, 16);
+		add(lblAccountType);
+		
 		JButton btnRegister = new JButton("Register");
 		btnRegister.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String user = newuserTEXT.getText();
 				String pass = newpassTEXT.getText();
+				AccountType accType = new AccountType();
+				accType.setAccType(AType.getSelectedIndex());
 				String confirm = confirmpassTEXT.getText();
 				if (!pass.equals(confirm)) {
 					lblPasswordDoesntMatch.setVisible(true);
 					return;
 				}
-				String mess = auth.register(user, pass);
+				String mess = auth.register(user, pass, accType);
 				if (mess == "Invalid username" || mess == "Username taken") {
 					lblInvalidUsername.setVisible(true);
 					return;
@@ -102,9 +114,6 @@ public class Register extends JPanel {
 		});
 		btnBack.setBounds(227, 223, 117, 29);
 		add(btnBack);
-		
-
 
 	}
-
 }

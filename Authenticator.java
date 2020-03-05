@@ -15,12 +15,12 @@ public class Authenticator {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String register(String username, String password) {
+	public String register(String username, String password, AccountType accType) {
 		boolean correctuser = Account.checkUsername(username);
 		boolean correctpass = Account.checkPassword(password);
 		boolean notsameuser = !accounts.containsKey(username);
 		if(correctuser && correctpass && notsameuser) {
-			accounts.put(username, new Account(username, password));
+			accounts.put(username, new Account(username, password, accType));
 			return "Works";
 		}
 		if(!correctuser) {
