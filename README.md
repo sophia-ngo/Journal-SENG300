@@ -12,7 +12,7 @@
 3. Click "Login."
 The user will be redirected to the main screen, else a user must register before logging in.
 
-**Registration**
+**Registration**\
 If a user does not have an account yet.
 1. Click "Register."
 2. Create username.
