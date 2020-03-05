@@ -17,6 +17,5 @@ If a user does not have an account yet.
 1. Click "Register."
 2. Create username.
 3. Create password.
-4. Select account type.
-5. Click "Register."
+4. Click "Register."
 Congratulations you have registered! Now the user will be redirected back to the login screen.
