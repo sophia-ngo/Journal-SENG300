@@ -1,3 +1,8 @@
+
+# LoginApplication
+
+credit colinauyeung
+
 # Journal-SENG300
 
 **How to Run the Program**
@@ -21,3 +26,4 @@ If a user does not have an account yet.
 Congratulations you have registered! Now the user will be redirected back to the login screen.
 
 Note: Most material referenced from tutorials.
+
