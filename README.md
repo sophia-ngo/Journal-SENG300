@@ -1,1 +1,3 @@
-# Journal-SENG300
+# LoginApplication
+
+credit colinauyeung
