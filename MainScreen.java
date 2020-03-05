@@ -24,7 +24,7 @@ public class MainScreen extends JPanel {
 		lblWelcome.setBounds(133, 122, 184, 16);
 		add(lblWelcome);
 		
-		JLabel lblName = new JLabel("Hello, <dynamic>!");
+		JLabel lblName = new JLabel("Hello, " + acc.getUsername() + "!");
 		lblName.setFont(new Font("LM Mono 10", Font.BOLD, 14));
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblName.setBounds(138, 170, 173, 16);
