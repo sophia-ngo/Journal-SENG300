@@ -91,8 +91,8 @@ public class Register extends JPanel {
 		btnRegister.setBounds(98, 223, 117, 29);
 		add(btnRegister);
 		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addMouseListener(new MouseAdapter() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Login panel = new Login(frame, auth);
@@ -100,8 +100,8 @@ public class Register extends JPanel {
 				frame.revalidate();
 			}
 		});
-		btnLogin.setBounds(227, 223, 117, 29);
-		add(btnLogin);
+		btnBack.setBounds(227, 223, 117, 29);
+		add(btnBack);
 		
 
 

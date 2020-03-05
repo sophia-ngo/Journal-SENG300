@@ -54,6 +54,10 @@ public class Login extends JPanel {
 				Account acc = auth.login(user, pass);
 				if (acc == null) {
 					lblInvalidLogin.setVisible(true);
+				}else {
+					MainScreen panel = new MainScreen(frame, acc);
+					frame.setContentPane(panel);
+					frame.revalidate();
 				}
 			}
 		});
