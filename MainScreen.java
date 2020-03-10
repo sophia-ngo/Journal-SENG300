@@ -5,6 +5,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+/**
+ * Main screen of the program after logging in.
+ * 
+ * @author Group 2
+ */
 public class MainScreen extends JPanel {
 
 	/**
@@ -12,9 +17,8 @@ public class MainScreen extends JPanel {
 	 */
 	public MainScreen(JFrame frame, Account acc) {
 		setLayout(null);
-		
 
-		JLabel lblNewLabel = new JLabel(acc.getAccountType().getAccType() +  " Account");
+		JLabel lblNewLabel = new JLabel(acc.getAccountType().getAccType() + " Account");
 		lblNewLabel.setBounds(6, 6, 202, 16);
 		add(lblNewLabel);
 
@@ -23,13 +27,13 @@ public class MainScreen extends JPanel {
 		lblWelcome.setFont(new Font("LM Mono 10", Font.BOLD, 16));
 		lblWelcome.setBounds(133, 122, 184, 16);
 		add(lblWelcome);
-		
+
 		JLabel lblName = new JLabel("Hello, " + acc.getUsername() + "!");
 		lblName.setFont(new Font("LM Mono 10", Font.BOLD, 14));
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblName.setBounds(138, 170, 173, 16);
 		add(lblName);
-		
+
 		JLabel lblUofcJournalSubmission = new JLabel("Journal Submission System!");
 		lblUofcJournalSubmission.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUofcJournalSubmission.setFont(new Font("LM Mono 10", Font.BOLD, 16));
