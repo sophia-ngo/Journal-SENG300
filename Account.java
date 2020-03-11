@@ -6,11 +6,9 @@
 public class Account {
 
 	private String username;
-
 	private String password;
-
 	private AccountType accType;
-
+	
 	public static boolean checkUsername(String username) {
 		if (username.length() <= 16) {
 			return true;
