@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class Authenticator {
 		try {
 			File file = new File("accounts.txt");
 			FileReader reader = new FileReader(file);
-			BufferedReader bReader = new BufferedReader(fileReader);
+			BufferedReader bReader = new BufferedReader(reader);
 			StringBuffer stringBuff = new StringBuffer();
 			String line;
 			String userPass[];

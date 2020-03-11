@@ -9,12 +9,13 @@ import javax.swing.JFrame;
  */
 public class Mainframe {
 	private JFrame frame;
-	private Authenticator auth = new Authenticator();
+	private static Authenticator auth = new Authenticator();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					auth.checkAccounts();
 					Mainframe window = new Mainframe();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
