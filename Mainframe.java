@@ -25,6 +25,7 @@ public class Mainframe {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Login panel = new Login(frame, auth);
+		//AuthorGUI paneltest = new AuthorGUI();
 		frame.setContentPane(panel);
 		frame.revalidate();
 	}
