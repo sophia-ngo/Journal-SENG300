@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class AccountType {
+public class AccountType implements Serializable{
 	public String[] accTypes = {"Author", "Reviewer", "Editor"};
 	private String accType;
 	

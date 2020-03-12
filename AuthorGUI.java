@@ -18,6 +18,7 @@ public class AuthorGUI extends JPanel {
 	 */
 	public AuthorGUI(Database db) {
 		setLayout(null);
+		db.dbLoad();
 		
 		filenameTEXT = new JTextField();
 		filenameTEXT.setBounds(35, 194, 230, 26);
@@ -47,6 +48,7 @@ public class AuthorGUI extends JPanel {
 				Submission s1 = new Submission();
 				s1.submit(filenameTEXT.getText());
 				db.dbAdd("sub1",s1);
+				db.dbSave();
 			}
 		});
 		btnSubmit.setBounds(266, 235, 161, 29);

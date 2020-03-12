@@ -2,7 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 
 
-public class Submission {
+public class Submission implements Serializable{
 	
 	private byte[] bytesFromFile;
 	private AccountType acc = new AccountType();
