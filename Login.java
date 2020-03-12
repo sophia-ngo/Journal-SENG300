@@ -17,7 +17,7 @@ public class Login extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Login(JFrame frame, Authenticator auth) {
+	public Login(JFrame frame, Authenticator auth, Database db) {
 		setLayout(null);
 
 		JLabel lblNewLabel = new JLabel("Welcome to U of C");
@@ -80,7 +80,7 @@ public class Login extends JPanel {
 				} else {
 					if(acc.getAccountType().getAccType().equals("Author"))
 					{
-						AuthorGUI panel = new AuthorGUI();
+						AuthorGUI panel = new AuthorGUI(db);
 						frame.setContentPane(panel);
 						frame.revalidate();
 					} else {
@@ -102,7 +102,7 @@ public class Login extends JPanel {
 		btnRegister.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Register panel = new Register(frame, auth);
+				Register panel = new Register(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}

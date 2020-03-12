@@ -15,7 +15,7 @@ public class Register extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Register(JFrame frame, Authenticator auth) {
+	public Register(JFrame frame, Authenticator auth, Database db) {
 		setLayout(null);
 		
 		JLabel lblRegisterForAccount = new JLabel("Register for Account");
@@ -95,7 +95,7 @@ public class Register extends JPanel {
 					lblInvalidPassword.setVisible(true);
 					return;
 				}
-				Login panel = new Login(frame, auth);
+				Login panel = new Login(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
@@ -107,7 +107,7 @@ public class Register extends JPanel {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Login panel = new Login(frame, auth);
+				Login panel = new Login(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
