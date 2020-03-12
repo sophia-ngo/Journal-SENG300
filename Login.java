@@ -11,8 +11,8 @@ import javax.swing.SwingConstants;
 /**
  * Login panel that has text fields for username and password. Also includes,
  * buttons for logging in and registering.
- * 
- * @author Group 2
+ *
+ * @author colinauyeung, Group 2
  */
 public class Login extends JPanel {
 	private JTextField usernameTEXT;
