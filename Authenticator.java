@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -27,17 +29,19 @@ public class Authenticator {
 			File file = new File("accounts.txt");
 			FileReader reader = new FileReader(file);
 			BufferedReader bReader = new BufferedReader(reader);
-			StringBuffer stringBuff = new StringBuffer();
+
 			String line;
-			String userPass[];
+			String userAcc[];
+			AccountType accType = new AccountType();
 			// Reads next line in text file until end
 			while ((line = bReader.readLine()) != null) {
-				userPass = line.split(" ");		// split current line by space
-				// add username and password to hashmap
-				
+				userAcc = line.split(" "); 		// split current line by space
+				accType.setAccType(Integer.parseInt(userAcc[2])); 	// sets account type
+				// adds username, password, account type to hashmap
+				accounts.put(userAcc[0], new Account(userAcc[0], userAcc[1], accType));
 			}
 			reader.close();
-		} catch {IOException e} {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -46,7 +50,18 @@ public class Authenticator {
 		boolean correctuser = Account.checkUsername(username);
 		boolean correctpass = Account.checkPassword(password);
 		boolean notsameuser = !accounts.containsKey(username);
+
 		if (correctuser && correctpass && notsameuser) {
+			// concatenates username, password, account type to write into file
+			String userAcc = username + " " + password + " " + accType.getAccNum() + "\n";
+			try {
+				FileWriter writer = new FileWriter("accounts.txt", true);
+				BufferedWriter bWriter = new BufferedWriter(writer);
+				bWriter.write(userAcc);		// write string into text file
+				bWriter.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			accounts.put(username, new Account(username, password, accType));
 			return "Works";
 		}

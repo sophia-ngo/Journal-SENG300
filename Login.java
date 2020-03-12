@@ -3,9 +3,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import java.awt.event.ActionListener;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
@@ -26,11 +24,11 @@ public class Login extends JPanel {
 	public Login(JFrame frame, Authenticator auth) {
 		setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Welcome to U of C");
+		JLabel lblNewLabel = new JLabel("Welcome to UJournal");
 
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("LM Mono 10", Font.BOLD, 16));
-		lblNewLabel.setBounds(105, 24, 239, 16);
+		lblNewLabel.setBounds(106, 28, 239, 16);
 		add(lblNewLabel);
 
 		JLabel lblUsername = new JLabel("Username");

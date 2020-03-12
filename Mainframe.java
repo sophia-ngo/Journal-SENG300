@@ -1,5 +1,5 @@
 import java.awt.EventQueue;
-
+import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 /**
@@ -31,8 +31,10 @@ public class Mainframe {
 	 */
 	public Mainframe() {
 		frame = new JFrame();
-		frame.setTitle("Login");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setTitle("UJournal");
+		BufferedImage myPicture;
+		frame.setSize(1200, 800);
+		frame.setLocationRelativeTo(null); // centers screen
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Login panel = new Login(frame, auth);
 		frame.setContentPane(panel);
