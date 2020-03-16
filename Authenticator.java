@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class Authenticator {
 
-	private HashMap<String, Account> accounts = new HashMap<String, Account>();
+	protected HashMap<String, Account> accounts = new HashMap<String, Account>();
 
 	/**
 	 * 
@@ -45,13 +45,20 @@ public class Authenticator {
 			e.printStackTrace();
 		}
 	}
-
-	public String register(String username, String password, AccountType accType) {
+	
+	public boolean checkSameUser(String username) {
+		if (accounts.containsKey(username)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String register(String username, String password, AccountType accType, boolean samePass) {
 		boolean correctuser = Account.checkUsername(username);
 		boolean correctpass = Account.checkPassword(password);
-		boolean notsameuser = !accounts.containsKey(username);
+		boolean notsameuser = !checkSameUser(username);
 
-		if (correctuser && correctpass && notsameuser) {
+		if (correctuser && correctpass && notsameuser && samePass) {
 			// concatenates username, password, account type to write into file
 			String userAcc = username + " " + password + " " + accType.getAccNum() + "\n";
 			try {
@@ -65,21 +72,11 @@ public class Authenticator {
 			accounts.put(username, new Account(username, password, accType));
 			return "Works";
 		}
-		if (!correctuser) {
-			return "Invalid username";
-		}
-		if (!correctpass) {
-			return "Invalid password";
-		}
-		if (!notsameuser) {
-			return "Username taken";
-		}
 		return "Unknown issue";
 	}
 
 	public Account login(String username, String password) {
 		if (accounts.containsKey(username)) {
-			System.out.println("found users");
 			if (accounts.get(username).getPassword().equals(password)) {
 				return accounts.get(username);
 			} else {

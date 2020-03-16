@@ -7,23 +7,11 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
-import javax.swing.JSplitPane;
-import java.awt.Component;
-import javax.swing.Box;
 import java.awt.Color;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.Cursor;
-import java.awt.TextArea;
 import javax.swing.JPasswordField;
-import javax.swing.JCheckBox;
-import javax.swing.JTextPane;
 import javax.swing.ImageIcon;
 
 /**
@@ -34,8 +22,7 @@ import javax.swing.ImageIcon;
  */
 public class Login extends JPanel {
 	private JTextField usernameTEXT;
-	private JTextField passwordTEXT;
-	private JPasswordField passwordField;
+	private JPasswordField passwordTEXT;
 
 	/**
 	 * Create the panel.
@@ -45,24 +32,21 @@ public class Login extends JPanel {
 		setLayout(null);
 
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsername.setBounds(350, 326, 78, 16);
+		lblUsername.setBounds(661, 267, 78, 16);
 		lblUsername.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(lblUsername);
 
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		lblPassword.setBounds(350, 401, 87, 16);
+		lblPassword.setBounds(661, 401, 87, 16);
 
 		lblPassword.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(lblPassword);
 
 		JLabel lblInvalidLogin = new JLabel(
 				"<html>The username and password entered did not match our records. Please double-check and try again.<html>");
-		lblInvalidLogin.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		lblInvalidLogin.setForeground(new Color(255, 51, 51));
-		lblInvalidLogin.setBounds(350, 461, 500, 36);
+		lblInvalidLogin.setBounds(661, 492, 449, 36);
 
 		lblInvalidLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblInvalidLogin.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -71,10 +55,10 @@ public class Login extends JPanel {
 		lblInvalidLogin.setVisible(false);
 
 		JButton btnLogin = new JButton("Log In");
-		btnLogin.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnLogin.setContentAreaFilled(false);
+		btnLogin.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		btnLogin.setBackground(new Color(245, 245, 245));
 		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnLogin.setBounds(472, 526, 117, 29);
+		btnLogin.setBounds(661, 558, 449, 29);
 
 		btnLogin.setFont(new Font("Arial", Font.BOLD, 16));
 
@@ -96,10 +80,10 @@ public class Login extends JPanel {
 		add(btnLogin);
 
 		JButton btnRegister = new JButton("Register");
-		btnRegister.setBorder(new LineBorder(new Color(0, 0, 0)));
-		btnRegister.setContentAreaFilled(false);
+		btnRegister.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		btnRegister.setBackground(new Color(245, 245, 245));
 		btnRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnRegister.setBounds(603, 526, 117, 29);
+		btnRegister.setBounds(661, 598, 449, 29);
 
 		btnRegister.setFont(new Font("Arial", Font.BOLD, 16));
 
@@ -116,28 +100,20 @@ public class Login extends JPanel {
 		passwordTEXT = new JPasswordField();
 		passwordTEXT.setBackground(new Color(245, 245, 245));
 		passwordTEXT.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
-		passwordTEXT.setBounds(350, 428, 500, 22);
+		passwordTEXT.setBounds(661, 445, 449, 36);
 		add(passwordTEXT);
 
-		passwordTEXT.setFont(new Font("Dialog", Font.PLAIN, 16));
+		passwordTEXT.setFont(new Font("Arial", Font.PLAIN, 16));
 		passwordTEXT.setColumns(10);
 
 		usernameTEXT = new JTextField();
 		usernameTEXT.setBackground(new Color(245, 245, 245));
 		usernameTEXT.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
-		usernameTEXT.setBounds(350, 353, 500, 22);
+		usernameTEXT.setBounds(661, 311, 449, 36);
 		add(usernameTEXT);
 
 		usernameTEXT.setFont(new Font("Arial", Font.PLAIN, 16));
 		usernameTEXT.setColumns(10);
-
-		JLabel lblNewLabel = new JLabel("UJournal");
-		lblNewLabel.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-		lblNewLabel.setBounds(541, 266, 117, 29);
-		add(lblNewLabel);
-
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 22));
 
 		JLabel showPass = new JLabel("");
 		showPass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -145,7 +121,7 @@ public class Login extends JPanel {
 		showPass.setIcon(new ImageIcon(Login.class.getResource("/images/eye.png")));
 		showPass.setHorizontalAlignment(SwingConstants.CENTER);
 		showPass.setFont(new Font("Arial", Font.BOLD, 22));
-		showPass.setBounds(849, 428, 39, 22);
+		showPass.setBounds(1115, 450, 39, 22);
 		add(showPass);
 
 		JLabel hidePass = new JLabel("");
@@ -153,10 +129,43 @@ public class Login extends JPanel {
 		hidePass.setIcon(new ImageIcon(Login.class.getResource("/images/eyecross.png")));
 		hidePass.setHorizontalAlignment(SwingConstants.CENTER);
 		hidePass.setFont(new Font("Arial", Font.BOLD, 22));
-		hidePass.setBounds(849, 428, 39, 22);
+		hidePass.setBounds(1115, 450, 39, 22);
 		add(hidePass);
-		hidePass.setVisible(false);
 
+		JLabel lblRegisterToday = new JLabel("Register today.");
+		lblRegisterToday.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRegisterToday.setForeground(new Color(40, 40, 40));
+		lblRegisterToday.setFont(new Font("Arial", Font.BOLD, 18));
+		lblRegisterToday.setBounds(186, 411, 228, 29);
+		add(lblRegisterToday);
+
+		JLabel lblYellowBlock = new JLabel("");
+		lblYellowBlock.setOpaque(true);
+		lblYellowBlock.setBackground(new Color(255, 217, 17));
+		lblYellowBlock.setBounds(0, 400, 600, 400);
+		add(lblYellowBlock);
+		
+		JLabel lblForWritersEditors = new JLabel("For authors, reviewers, editors.");
+		lblForWritersEditors.setHorizontalAlignment(SwingConstants.CENTER);
+		lblForWritersEditors.setForeground(Color.WHITE);
+		lblForWritersEditors.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 18));
+		lblForWritersEditors.setBounds(154, 356, 292, 22);
+		add(lblForWritersEditors);
+		
+		JLabel lblUJournal = new JLabel("UJournal");
+		lblUJournal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUJournal.setForeground(Color.WHITE);
+		lblUJournal.setFont(new Font("Arial", Font.BOLD, 40));
+		lblUJournal.setBounds(0, 298, 600, 42);
+		add(lblUJournal);
+		
+				JLabel lblRedBlock = new JLabel("");
+				lblRedBlock.setOpaque(true);
+				lblRedBlock.setBackground(new Color(231, 43, 46));
+				lblRedBlock.setBounds(0, 0, 600, 400);
+				add(lblRedBlock);
+		
+		hidePass.setVisible(false);
 		showPass.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
