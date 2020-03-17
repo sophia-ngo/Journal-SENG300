@@ -27,6 +27,7 @@ public class Authenticator {
 	public void checkAccounts() {
 		try {
 			File file = new File("accounts.txt");
+			file.createNewFile();
 			FileReader reader = new FileReader(file);
 			BufferedReader bReader = new BufferedReader(reader);
 
