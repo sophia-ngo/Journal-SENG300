@@ -160,7 +160,7 @@ public class Register extends JPanel {
 
 				auth.register(user, pass, accType, same);
 				if (check) {
-					Login panel = new Login(frame, auth);
+					Login panel = new Login(frame, auth, true);
 					frame.setContentPane(panel);
 					frame.revalidate();
 				}
@@ -178,7 +178,7 @@ public class Register extends JPanel {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Login panel = new Login(frame, auth);
+				Login panel = new Login(frame, auth, true);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}

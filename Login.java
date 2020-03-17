@@ -27,9 +27,17 @@ public class Login extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Login(JFrame frame, Authenticator auth) {
+	public Login(JFrame frame, Authenticator auth, Boolean success) {
 		setBackground(Color.WHITE);
 		setLayout(null);
+
+		JLabel lblSuccess = new JLabel("Successfully registered!");
+		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuccess.setForeground(new Color(51, 204, 0));
+		lblSuccess.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblSuccess.setBounds(661, 221, 170, 22);
+		add(lblSuccess);
+		lblSuccess.setVisible(success);
 
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,6 +73,7 @@ public class Login extends JPanel {
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				lblSuccess.setVisible(false);
 				String user = usernameTEXT.getText();
 				String pass = passwordTEXT.getText();
 				Account acc = auth.login(user, pass);
@@ -144,27 +153,27 @@ public class Login extends JPanel {
 		lblYellowBlock.setBackground(new Color(255, 217, 17));
 		lblYellowBlock.setBounds(0, 400, 600, 400);
 		add(lblYellowBlock);
-		
+
 		JLabel lblForWritersEditors = new JLabel("For authors, reviewers, editors.");
 		lblForWritersEditors.setHorizontalAlignment(SwingConstants.CENTER);
 		lblForWritersEditors.setForeground(Color.WHITE);
 		lblForWritersEditors.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 18));
 		lblForWritersEditors.setBounds(154, 356, 292, 22);
 		add(lblForWritersEditors);
-		
+
 		JLabel lblUJournal = new JLabel("UJournal");
 		lblUJournal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUJournal.setForeground(Color.WHITE);
 		lblUJournal.setFont(new Font("Arial", Font.BOLD, 40));
 		lblUJournal.setBounds(0, 298, 600, 42);
 		add(lblUJournal);
-		
-				JLabel lblRedBlock = new JLabel("");
-				lblRedBlock.setOpaque(true);
-				lblRedBlock.setBackground(new Color(231, 43, 46));
-				lblRedBlock.setBounds(0, 0, 600, 400);
-				add(lblRedBlock);
-		
+
+		JLabel lblRedBlock = new JLabel("");
+		lblRedBlock.setOpaque(true);
+		lblRedBlock.setBackground(new Color(231, 43, 46));
+		lblRedBlock.setBounds(0, 0, 600, 400);
+		add(lblRedBlock);
+
 		hidePass.setVisible(false);
 		showPass.addMouseListener(new MouseAdapter() {
 			@Override
