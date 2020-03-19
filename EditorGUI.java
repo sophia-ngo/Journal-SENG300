@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
 
 public class EditorGUI extends JPanel {
 	private JTextField textField;
@@ -42,9 +43,17 @@ public class EditorGUI extends JPanel {
 			}
 		});
 		
-		textField = new JTextField(Arrays.toString(Reviewers));
-		add(textField);
-		textField.setColumns(10);
+		JLabel lblNewLabel_1 = new JLabel("Select Reviewer 2");
+		add(lblNewLabel_1);
+		
+		JComboBox comboBox_1 = new JComboBox(Reviewers);
+		add(comboBox_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Select Reviewer 3");
+		add(lblNewLabel_2);
+		
+		JComboBox comboBox_2 = new JComboBox(Reviewers);
+		add(comboBox_2);
 		
 		JLabel lblNewLabel = new JLabel("Select Paper");
 		add(lblNewLabel);
