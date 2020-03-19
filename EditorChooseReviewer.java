@@ -11,31 +11,11 @@ public class EditorChooseReviewer {
 
 		public static String reviewers[] = { };
 		
-	/*
-	public static void main(String[] args)
-	{
-		ReadFile rf = new ReadFile();
-		
-		String filename = "accounts.txt";
-		
-		try
-		{
-			reviewers = rf.readLines(filename);
-			
-
-		}
-		catch(IOException e)
-		{
-			
-		}
-	}
-}
-*/
 		public static void main(String[] args) throws Exception {
 			List<String> reviewers = Collections.emptyList(); 
 			try 
 			{ 
-				reviewers = Files.readAllLines(Paths.get("accounts.txt"), StandardCharsets.UTF_8); 
+				reviewers = Files.readAllLines(Paths.get("usernames.txt"), StandardCharsets.UTF_8); 
 			} catch 
 				(IOException e) { 
 				// TODO Auto-generated catch block 
