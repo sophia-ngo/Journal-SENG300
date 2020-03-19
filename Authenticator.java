@@ -50,7 +50,22 @@ public class Authenticator {
 		boolean correctuser = Account.checkUsername(username);
 		boolean correctpass = Account.checkPassword(password);
 		boolean notsameuser = !accounts.containsKey(username);
-
+		
+		if (correctuser && correctpass && notsameuser) {
+			String userAcc = username + " " + accType.getAccNum() + " " + "\n";
+			try {
+				File file = new File("usernames.txt"); 
+				FileWriter writer = new FileWriter("usernames.txt", true);
+				BufferedWriter bWriter = new BufferedWriter(writer);
+				bWriter.write(userAcc);		// write string into text file
+				bWriter.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			accounts.put(username, new Account(username, password, accType));
+			return "Works";
+		}
+		
 		if (correctuser && correctpass && notsameuser) {
 			// concatenates username, password, account type to write into file
 			String userAcc = username + " " + password + " " + accType.getAccNum() + "\n";
