@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.Cursor;
-
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.Font;
@@ -240,8 +239,8 @@ public class Register extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) newPassTEXT).setEchoChar('•');
-				((JPasswordField) confirmPassTEXT).setEchoChar('•');
+				((JPasswordField) newPassTEXT).setEchoChar('Â•');
+				((JPasswordField) confirmPassTEXT).setEchoChar('Â•');
 			}
 		});
 
