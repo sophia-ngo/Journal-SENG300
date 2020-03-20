@@ -35,7 +35,7 @@ public class Mainframe {
 		frame.setSize(1200, 835);
 		frame.setLocationRelativeTo(null); // centers screen
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Login panel = new Login(frame, auth, false);
+		Login panel = new Login(frame, auth);
 		frame.setContentPane(panel);
 		frame.revalidate();
 	}

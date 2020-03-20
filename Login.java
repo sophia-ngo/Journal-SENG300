@@ -27,7 +27,7 @@ public class Login extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Login(JFrame frame, Authenticator auth, Boolean success) {
+	public Login(JFrame frame, Authenticator auth) {
 		setBackground(Color.WHITE);
 		setLayout(null);
 
@@ -37,7 +37,7 @@ public class Login extends JPanel {
 		lblSuccess.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblSuccess.setBounds(661, 221, 170, 22);
 		add(lblSuccess);
-		lblSuccess.setVisible(success);
+		lblSuccess.setVisible(auth.getSuccess());
 
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setHorizontalAlignment(SwingConstants.CENTER);
@@ -79,23 +79,23 @@ public class Login extends JPanel {
 				Account acc = auth.login(user, pass);
 				if (acc == null) {
 					lblInvalidLogin.setVisible(true);
-				}
+				} else {
+					int accNum = auth.accounts.get(user).getAccountType().getAccNum();
 
-				int accNum = auth.accounts.get(user).getAccountType().getAccNum();
-				if (accNum == 0) {
-					MainScreen panel = new MainScreen(frame, acc, auth);
-					frame.setContentPane(panel);
-					frame.revalidate();
-				} else if (accNum == 1) {
-					MainScreen panel = new MainScreen(frame, acc, auth);
-					frame.setContentPane(panel);
-					frame.revalidate();
-				} else if (accNum == 2) {
-					EditorGUI panel = new EditorGUI();
-					frame.setContentPane(panel);
-					frame.revalidate();
+					if (accNum == 0) {
+						MainScreen panel = new MainScreen(frame, acc, auth);
+						frame.setContentPane(panel);
+						frame.revalidate();
+					} else if (accNum == 1) {
+						MainScreen panel = new MainScreen(frame, acc, auth);
+						frame.setContentPane(panel);
+						frame.revalidate();
+					} else if (accNum == 2) {
+						EditorGUI panel = new EditorGUI();
+						frame.setContentPane(panel);
+						frame.revalidate();
+					}
 				}
-
 			}
 		});
 		add(btnLogin);
@@ -201,7 +201,7 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) passwordTEXT).setEchoChar('â€¢');
+				((JPasswordField) passwordTEXT).setEchoChar('•');
 			}
 		});
 

@@ -47,7 +47,7 @@ public class MainScreen extends JPanel {
 		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Login panel = new Login(frame, auth, false);
+				Login panel = new Login(frame, auth);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}

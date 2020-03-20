@@ -159,7 +159,8 @@ public class Register extends JPanel {
 
 				auth.register(user, pass, accType, same);
 				if (check) {
-					Login panel = new Login(frame, auth, true);
+					auth.setSuccess(true);
+					Login panel = new Login(frame, auth);
 					frame.setContentPane(panel);
 					frame.revalidate();
 				}
@@ -177,7 +178,8 @@ public class Register extends JPanel {
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Login panel = new Login(frame, auth, true);
+				auth.setSuccess(false);
+				Login panel = new Login(frame, auth);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
@@ -239,8 +241,8 @@ public class Register extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) newPassTEXT).setEchoChar('Â•');
-				((JPasswordField) confirmPassTEXT).setEchoChar('Â•');
+				((JPasswordField) newPassTEXT).setEchoChar('•');
+				((JPasswordField) confirmPassTEXT).setEchoChar('•');
 			}
 		});
 

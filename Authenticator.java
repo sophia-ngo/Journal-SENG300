@@ -13,6 +13,7 @@ import java.util.HashMap;
 public class Authenticator {
 
 	protected HashMap<String, Account> accounts = new HashMap<String, Account>();
+	private boolean success; // boolean for successful registration
 
 	/**
 	 * 
@@ -20,7 +21,7 @@ public class Authenticator {
 	public Authenticator() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	/**
 	 * Reads the accounts.txt file and adds to HashMap.
 	 */
@@ -85,6 +86,14 @@ public class Authenticator {
 		} else {
 			return null;
 		}
+	}
+
+	public boolean getSuccess() {
+		return success;
+	}
+	
+	public void setSuccess(boolean succ) {
+		success = succ;
 	}
 
 }
