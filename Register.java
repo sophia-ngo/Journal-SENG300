@@ -113,7 +113,6 @@ public class Register extends JPanel {
 		aType.setBackground(Color.WHITE);
 		aType.setBorder(null);
 		aType.setFont(new Font("Arial", Font.PLAIN, 16));
-
 		aType.setBounds(722, 507, 130, 27);
 		add(aType);
 

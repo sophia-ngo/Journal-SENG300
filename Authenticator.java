@@ -34,10 +34,10 @@ public class Authenticator {
 
 			String line;
 			String userAcc[];
-			AccountType accType = new AccountType();
 			// Reads next line in text file until end
 			while ((line = bReader.readLine()) != null) {
 				userAcc = line.split(" "); 		// split current line by space
+				AccountType accType = new AccountType();
 				accType.setAccType(Integer.parseInt(userAcc[2])); 	// sets account type
 				// adds username, password, account type to hashmap
 				accounts.put(userAcc[0], new Account(userAcc[0], userAcc[1], accType));

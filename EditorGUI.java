@@ -1,11 +1,17 @@
 import javax.swing.JPanel;
 import javax.swing.JList;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,12 +25,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.awt.Font;
 
 public class EditorGUI extends JPanel {
 
-	public EditorGUI() {
+	@SuppressWarnings("resource")
+	public EditorGUI(JFrame frame, Authenticator auth) {
+		setBackground(Color.WHITE);
 		// create token1
-		String token1 = "";
+		String[] token1;
 
 		// for-each loop for calculating heat index of May - October
 
@@ -45,8 +54,10 @@ public class EditorGUI extends JPanel {
 		// while loop
 		while (inFile1.hasNext()) {
 			// find next line
-			token1 = inFile1.next();
-			temps.add(token1);
+			token1 = inFile1.next().split(" ");
+			if (token1[2].equals("1")) {
+				temps.add(token1[0]);
+			}
 		}
 		inFile1.close();
 
@@ -63,37 +74,87 @@ public class EditorGUI extends JPanel {
 		 * //returns a string that textually represents the object } catch(IOException
 		 * e) { e.printStackTrace(); } }
 		 */
+		setLayout(null);
 
-		JLabel SelectReviewer = new JLabel("Select Reviewer");
-		add(SelectReviewer);
+		JLabel lblSelectReviewer = new JLabel("Select Reviewer");
+		lblSelectReviewer.setBounds(399, 250, 154, 20);
+		lblSelectReviewer.setFont(new Font("Arial", Font.PLAIN, 16));
+		add(lblSelectReviewer);
+
 		JComboBox Reviewerlist = new JComboBox(Reviewers);
+		Reviewerlist.setFont(new Font("Arial", Font.PLAIN, 16));
+		Reviewerlist.setBackground(Color.WHITE);
+		Reviewerlist.setBorder(null);
+		Reviewerlist.setBounds(628, 250, 154, 20);
 		Reviewerlist.setEditable(true);
 		Reviewerlist.setMaximumRowCount(100);
 		add(Reviewerlist);
 
-		JList list = new JList();
-		add(list);
-
-		JButton btnNewButton = new JButton("Assign");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+		JButton btnAssign = new JButton("Assign");
+		btnAssign.setFont(new Font("Arial", Font.BOLD, 16));
+		btnAssign.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		btnAssign.setBackground(new Color(245, 245, 245));
+		btnAssign.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnAssign.setBounds(628, 376, 154, 29);
+		btnAssign.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Reviewer Assigned");
 
 			}
 		});
-		btnNewButton.addActionListener(new ActionListener() {
+		btnAssign.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 
-		JLabel lblNewLabel = new JLabel("Select Paper");
-		add(lblNewLabel);
+		JLabel lblSelectPaper = new JLabel("Select Paper");
+		lblSelectPaper.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblSelectPaper.setBounds(399, 313, 122, 20);
+		add(lblSelectPaper);
 
 		String[] Submissions = {};
-		JComboBox comboBox = new JComboBox();
-		add(comboBox);
-		add(btnNewButton);
+		JComboBox comboBoxSelectPaper = new JComboBox();
+		comboBoxSelectPaper.setBackground(Color.WHITE);
+		comboBoxSelectPaper.setFont(new Font("Arial", Font.PLAIN, 16));
+		comboBoxSelectPaper.setBorder(null);
+		comboBoxSelectPaper.setBounds(628, 313, 154, 20);
+		add(comboBoxSelectPaper);
+		add(btnAssign);
+
+		JLabel lblAccountType = new JLabel("Editor Account");
+		lblAccountType.setForeground(Color.WHITE);
+		lblAccountType.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblAccountType.setBounds(10, 11, 149, 16);
+		add(lblAccountType);
+
+		JLabel lblLogout = new JLabel("<HTML><U>Logout</U></HTML>");
+		lblLogout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblLogout.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Login panel = new Login(frame, auth, null);
+				frame.setContentPane(panel);
+				frame.revalidate();
+			}
+		});
+		lblLogout.setForeground(Color.WHITE);
+		lblLogout.setFont(new Font("19ial", Font.PLAIN, 16));
+		lblLogout.setBounds(1119, 11, 57, 17);
+		add(lblLogout);
+
+		JLabel lblUJournal = new JLabel("UJournal");
+		lblUJournal.setForeground(Color.WHITE);
+		lblUJournal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUJournal.setFont(new Font("Arial", Font.BOLD, 40));
+		lblUJournal.setBounds(500, 48, 199, 42);
+		add(lblUJournal);
+
+		JLabel lblRedBlock = new JLabel("");
+		lblRedBlock.setOpaque(true);
+		lblRedBlock.setBackground(new Color(231, 43, 46));
+		lblRedBlock.setBounds(0, 0, 1200, 122);
+		add(lblRedBlock);
 
 	}
 

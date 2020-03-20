@@ -4,7 +4,8 @@ public class AccountType implements Serializable{
   
 	public String[] accTypes = { "Author", "Reviewer", "Editor" };
 	private String accType;
-
+	private int accNum;
+	
 	public String getAccType() {
 		return accType;
 	}

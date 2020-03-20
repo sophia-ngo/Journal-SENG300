@@ -25,6 +25,7 @@ public class Database implements Serializable{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void dbLoad() {
 		try {
 			ObjectInputStream is = new ObjectInputStream(new FileInputStream(fileName));

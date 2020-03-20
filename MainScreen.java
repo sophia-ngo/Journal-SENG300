@@ -19,22 +19,22 @@ public class MainScreen extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MainScreen(JFrame frame, Account acc, Authenticator auth) {
+	public MainScreen(JFrame frame, Account acc, Authenticator auth, Database db) {
 		setBackground(Color.WHITE);
 		setLayout(null);
 
-		JLabel lblNewLabel = new JLabel(acc.getAccountType().getAccType() + " Account");
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 11, 149, 16);
-		add(lblNewLabel);
+		JLabel lblAccountType = new JLabel(acc.getAccountType().getAccType() + " Account");
+		lblAccountType.setForeground(Color.WHITE);
+		lblAccountType.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblAccountType.setBounds(10, 11, 149, 16);
+		add(lblAccountType);
 
-		JLabel lblWelcome = new JLabel("UJournal");
-		lblWelcome.setForeground(Color.WHITE);
-		lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWelcome.setFont(new Font("Arial", Font.BOLD, 40));
-		lblWelcome.setBounds(500, 48, 199, 42);
-		add(lblWelcome);
+		JLabel lblUJournal = new JLabel("UJournal");
+		lblUJournal.setForeground(Color.WHITE);
+		lblUJournal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUJournal.setFont(new Font("Arial", Font.BOLD, 40));
+		lblUJournal.setBounds(500, 48, 199, 42);
+		add(lblUJournal);
 
 		JLabel lblName = new JLabel("Hello, " + acc.getUsername() + "!");
 		lblName.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -42,20 +42,20 @@ public class MainScreen extends JPanel {
 		lblName.setBounds(513, 148, 173, 19);
 		add(lblName);
 
-		JLabel lblNewLabel_1 = new JLabel("<HTML><U>Logout</U></HTML>");
-		lblNewLabel_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+		JLabel lblLogout = new JLabel("<HTML><U>Logout</U></HTML>");
+		lblLogout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Login panel = new Login(frame, auth, null);
+				Login panel = new Login(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
 		});
-		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(1120, 11, 57, 17);
-		add(lblNewLabel_1);
+		lblLogout.setForeground(Color.WHITE);
+		lblLogout.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblLogout.setBounds(1119, 11, 57, 17);
+		add(lblLogout);
 
 		JLabel lblRedBlock = new JLabel("");
 		lblRedBlock.setOpaque(true);

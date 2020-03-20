@@ -67,31 +67,30 @@ public class Login extends JPanel {
 		btnLogin.setBackground(new Color(245, 245, 245));
 		btnLogin.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnLogin.setBounds(661, 558, 449, 29);
-
 		btnLogin.setFont(new Font("Arial", Font.BOLD, 16));
 
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				lblSuccess.setVisible(false);
+				auth.setSuccess(false);
 				String user = usernameTEXT.getText();
 				String pass = passwordTEXT.getText();
 				Account acc = auth.login(user, pass);
 				if (acc == null) {
 					lblInvalidLogin.setVisible(true);
 				} else {
-					int type = acc.getAccountType().getAccNum();
+					String type = acc.getAccountType().getAccType();
 
-					if (type == 0) {
-						AuthorGUI panel = new AuthorGUI(db);
+					if (type.equals("Author")) {
+						AuthorGUI panel = new AuthorGUI(frame, auth, db);
 						frame.setContentPane(panel);
 						frame.revalidate();
-					} else if (type == 1) {
-						MainScreen panel = new MainScreen(frame, acc, auth);
+					} else if (type.equals("Reviewer")) {
+						MainScreen panel = new MainScreen(frame, acc, auth, db);
 						frame.setContentPane(panel);
 						frame.revalidate();
-					} else if (type == 2) {
-						EditorGUI panel = new EditorGUI();
+					} else if (type.equals("Editor")) {
+						EditorGUI panel = new EditorGUI(frame, auth);
 						frame.setContentPane(panel);
 						frame.revalidate();
 					}
