@@ -1,10 +1,7 @@
+import java.io.Serializable;
 
-/**
- * Stores different account types.
- * 
- * @author Group 2
- */
-public class AccountType {
+public class AccountType implements Serializable{
+  
 	public String[] accTypes = { "Author", "Reviewer", "Editor" };
 	private String accType;
 

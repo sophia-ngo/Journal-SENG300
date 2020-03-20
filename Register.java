@@ -30,7 +30,9 @@ public class Register extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Register(JFrame frame, Authenticator auth) {
+
+	public Register(JFrame frame, Authenticator auth, Database db) {
+    
 		setBackground(Color.WHITE);
 		setLayout(null);
 
@@ -241,8 +243,8 @@ public class Register extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) newPassTEXT).setEchoChar('•');
-				((JPasswordField) confirmPassTEXT).setEchoChar('•');
+				((JPasswordField) newPassTEXT).setEchoChar('Â•');
+				((JPasswordField) confirmPassTEXT).setEchoChar('Â•');
 			}
 		});
 

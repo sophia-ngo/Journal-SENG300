@@ -27,7 +27,7 @@ public class Login extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Login(JFrame frame, Authenticator auth) {
+	public Login(JFrame frame, Authenticator auth, Database db) {
 		setBackground(Color.WHITE);
 		setLayout(null);
 
@@ -80,10 +80,10 @@ public class Login extends JPanel {
 				if (acc == null) {
 					lblInvalidLogin.setVisible(true);
 				} else {
-					int accNum = auth.accounts.get(user).getAccountType().getAccNum();
+					int accNum = acc.getAccountType().getAccNum
 
 					if (accNum == 0) {
-						MainScreen panel = new MainScreen(frame, acc, auth);
+						AuthorGUI panel = new AuthorGUI(db);
 						frame.setContentPane(panel);
 						frame.revalidate();
 					} else if (accNum == 1) {
@@ -111,7 +111,7 @@ public class Login extends JPanel {
 		btnRegister.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Register panel = new Register(frame, auth);
+				Register panel = new Register(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
@@ -201,7 +201,7 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) passwordTEXT).setEchoChar('•');
+				((JPasswordField) passwordTEXT).setEchoChar('â€¢');
 			}
 		});
 
