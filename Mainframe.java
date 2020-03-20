@@ -32,11 +32,10 @@ public class Mainframe {
 	public Mainframe() {
 		frame = new JFrame();
 		frame.setTitle("UJournal");
-		BufferedImage myPicture;
-		frame.setSize(1200, 800);
+		frame.setSize(1200, 835);
 		frame.setLocationRelativeTo(null); // centers screen
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Login panel = new Login(frame, auth);
+		Login panel = new Login(frame, auth, false);
 		frame.setContentPane(panel);
 		frame.revalidate();
 	}

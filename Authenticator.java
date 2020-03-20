@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class Authenticator {
 
-	private HashMap<String, Account> accounts = new HashMap<String, Account>();
+	protected HashMap<String, Account> accounts = new HashMap<String, Account>();
 
 	/**
 	 * 
@@ -27,6 +27,7 @@ public class Authenticator {
 	public void checkAccounts() {
 		try {
 			File file = new File("accounts.txt");
+			file.createNewFile();
 			FileReader reader = new FileReader(file);
 			BufferedReader bReader = new BufferedReader(reader);
 
@@ -45,28 +46,19 @@ public class Authenticator {
 			e.printStackTrace();
 		}
 	}
-
-	public String register(String username, String password, AccountType accType) {
+	public boolean checkSameUser(String username) {
+		if (accounts.containsKey(username)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public String register(String username, String password, AccountType accType, boolean samePass) {
 		boolean correctuser = Account.checkUsername(username);
 		boolean correctpass = Account.checkPassword(password);
-		boolean notsameuser = !accounts.containsKey(username);
-		
-		if (correctuser && correctpass && notsameuser) {
-			String userAcc = username + " " + accType.getAccNum() + " " + "\n";
-			try {
-				File file = new File("usernames.txt"); 
-				FileWriter writer = new FileWriter("usernames.txt", true);
-				BufferedWriter bWriter = new BufferedWriter(writer);
-				bWriter.write(userAcc);		// write string into text file
-				bWriter.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			accounts.put(username, new Account(username, password, accType));
-			return "Works";
-		}
-		
-		if (correctuser && correctpass && notsameuser) {
+		boolean notsameuser = !checkSameUser(username);
+
+		if (correctuser && correctpass && notsameuser && samePass) {
 			// concatenates username, password, account type to write into file
 			String userAcc = username + " " + password + " " + accType.getAccNum() + "\n";
 			try {
@@ -80,21 +72,11 @@ public class Authenticator {
 			accounts.put(username, new Account(username, password, accType));
 			return "Works";
 		}
-		if (!correctuser) {
-			return "Invalid username";
-		}
-		if (!correctpass) {
-			return "Invalid password";
-		}
-		if (!notsameuser) {
-			return "Username taken";
-		}
 		return "Unknown issue";
 	}
 
 	public Account login(String username, String password) {
 		if (accounts.containsKey(username)) {
-			System.out.println("found users");
 			if (accounts.get(username).getPassword().equals(password)) {
 				return accounts.get(username);
 			} else {

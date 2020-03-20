@@ -10,14 +10,14 @@ public class Account {
 	private AccountType accType;
 	
 	public static boolean checkUsername(String username) {
-		if (username.length() <= 16) {
+		if (username.length() >= 4) {
 			return true;
 		}
 		return false;
 	}
 
 	public static boolean checkPassword(String pass) {
-		if (pass.length() >= 16) {
+		if (pass.length() >= 8) {
 			return true;
 		}
 		return false;
