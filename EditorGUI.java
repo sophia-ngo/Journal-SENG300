@@ -6,68 +6,95 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
-
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class EditorGUI extends JPanel {
-	private JTextField textField;
 
-	/**
-	 * Create the panel.
-	 */
-	public EditorGUI(JFrame frame, Authenticator auth) {
-		setLayout(null);
-		
-		String[] Reviewers= (EditorChooseReviewer.reviewers.clone());
-		
-		
-		
-		JComboBox comboBox = new JComboBox(Reviewers);
-		comboBox.setBounds(159, 16, 36, 26);
-		add(comboBox);
-		
-		JLabel Reviewer1 = new JLabel("Select Reviewer 1");
-		Reviewer1.setBounds(15, 19, 141, 20);
-		add(Reviewer1);
-		
-		JComboBox comboBox_1 = new JComboBox(Reviewers);
-		comboBox_1.setBounds(159, 80, 36, 26);
-		add(comboBox_1);
-		
-		JLabel Reviewer2 = new JLabel("Select Reviewer 2");
-		Reviewer2.setBounds(15, 83, 129, 20);
-		add(Reviewer2);
-		
-		JComboBox comboBox_2 = new JComboBox(Reviewers);
-		comboBox_2.setBounds(159, 146, 36, 26);
-		add(comboBox_2);
-		
-		JLabel reviewer3 = new JLabel("Select Reviewer 3");
-		reviewer3.setBounds(15, 149, 129, 20);
-		add(reviewer3);
-		
-		JComboBox comboBox_3 = new JComboBox();
-		comboBox_3.setBounds(361, 16, 36, 26);
-		add(comboBox_3);
-		
-		String[] Submissions = { };
-		JLabel lblNewLabel = new JLabel("Submission");
-		lblNewLabel.setBounds(242, 19, 104, 20);
-		add(lblNewLabel);
-		
-		JButton editorAssign = new JButton("Assign");
-		editorAssign.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+	public EditorGUI() {
+		// create token1
+		String token1 = "";
+
+		// for-each loop for calculating heat index of May - October
+
+		// create Scanner inFile1
+		Scanner inFile1 = null;
+		try {
+			inFile1 = new Scanner(new File("accounts.txt")).useDelimiter(",\\s*");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		// Original answer used LinkedList, but probably preferable to use ArrayList in
+		// most cases
+		// List<String> = new LinkedList<String>();
+		List<String> temps = new ArrayList<String>();
+
+		// while loop
+		while (inFile1.hasNext()) {
+			// find next line
+			token1 = inFile1.next();
+			temps.add(token1);
+		}
+		inFile1.close();
+
+		String[] Reviewers = temps.toArray(new String[0]);
+
+		/*
+		 * try { FileReader fr=new FileReader("accounts.txt"); //reads the file
+		 * BufferedReader br=new BufferedReader(fr); //creates a buffering character
+		 * input stream StringBuffer sb=new StringBuffer(); //constructs a string buffer
+		 * with no characters String line; while((line=br.readLine())!=null) {
+		 * sb.append(line); //appends line to string buffer sb.append("\n"); //line feed
+		 * } fr.close(); //closes the stream and release the resources
+		 * System.out.println("Contents of File: "); System.out.println(sb.toString());
+		 * //returns a string that textually represents the object } catch(IOException
+		 * e) { e.printStackTrace(); } }
+		 */
+
+		JLabel SelectReviewer = new JLabel("Select Reviewer");
+		add(SelectReviewer);
+		JComboBox Reviewerlist = new JComboBox(Reviewers);
+		Reviewerlist.setEditable(true);
+		Reviewerlist.setMaximumRowCount(100);
+		add(Reviewerlist);
+
+		JList list = new JList();
+		add(list);
+
+		JButton btnNewButton = new JButton("Assign");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Reviewer Assigned");
+
 			}
 		});
-		editorAssign.setBounds(282, 145, 115, 29);
-		add(editorAssign);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+
+		JLabel lblNewLabel = new JLabel("Select Paper");
+		add(lblNewLabel);
+
+		String[] Submissions = {};
+		JComboBox comboBox = new JComboBox();
+		add(comboBox);
+		add(btnNewButton);
 
 	}
+
 }
