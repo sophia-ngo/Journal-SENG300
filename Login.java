@@ -79,11 +79,23 @@ public class Login extends JPanel {
 				Account acc = auth.login(user, pass);
 				if (acc == null) {
 					lblInvalidLogin.setVisible(true);
-				} else {
+				}
+
+				int accNum = auth.accounts.get(user).getAccountType().getAccNum();
+				if (accNum == 0) {
 					MainScreen panel = new MainScreen(frame, acc, auth);
 					frame.setContentPane(panel);
 					frame.revalidate();
+				} else if (accNum == 1) {
+					MainScreen panel = new MainScreen(frame, acc, auth);
+					frame.setContentPane(panel);
+					frame.revalidate();
+				} else if (accNum == 2) {
+					EditorGUI panel = new EditorGUI();
+					frame.setContentPane(panel);
+					frame.revalidate();
 				}
+
 			}
 		});
 		add(btnLogin);
