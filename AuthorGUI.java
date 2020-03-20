@@ -6,6 +6,7 @@ import javax.swing.JFileChooser;
 import java.io.File;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Color;
 
 
 
@@ -17,11 +18,12 @@ public class AuthorGUI extends JPanel {
 	 * Create the panel.
 	 */
 	public AuthorGUI(Database db) {
+		setBackground(Color.WHITE);
 		setLayout(null);
 		db.dbLoad();
 		
 		filenameTEXT = new JTextField();
-		filenameTEXT.setBounds(35, 194, 230, 26);
+		filenameTEXT.setBounds(385, 447, 230, 26);
 		add(filenameTEXT);
 		filenameTEXT.setColumns(10);
 		
@@ -38,7 +40,7 @@ public class AuthorGUI extends JPanel {
 				filenameTEXT.setText(filename);
 			}
 		});
-		btnChooseFile.setBounds(266, 194, 161, 29);
+		btnChooseFile.setBounds(616, 447, 161, 29);
 		add(btnChooseFile);
 		
 		JButton btnSubmit = new JButton("Submit");
@@ -51,7 +53,7 @@ public class AuthorGUI extends JPanel {
 				db.dbSave();
 			}
 		});
-		btnSubmit.setBounds(266, 235, 161, 29);
+		btnSubmit.setBounds(616, 488, 161, 29);
 		add(btnSubmit);
 		
 		JButton btnDownload = new JButton("Download");
@@ -62,7 +64,7 @@ public class AuthorGUI extends JPanel {
 				s1.download();
 			}
 		});
-		btnDownload.setBounds(280, 153, 117, 29);
+		btnDownload.setBounds(630, 406, 117, 29);
 		add(btnDownload);
 		
 		

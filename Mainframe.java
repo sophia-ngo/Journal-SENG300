@@ -37,8 +37,7 @@ public class Mainframe {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Database db = new Database();
 		Login panel = new Login(frame, auth, db);
-		AuthorGUI paneltest = new AuthorGUI(db);
-		frame.setContentPane(paneltest);
+		frame.setContentPane(panel);
 		frame.revalidate();
 	}
 

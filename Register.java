@@ -162,7 +162,7 @@ public class Register extends JPanel {
 				auth.register(user, pass, accType, same);
 				if (check) {
 					auth.setSuccess(true);
-					Login panel = new Login(frame, auth);
+					Login panel = new Login(frame, auth, db);
 					frame.setContentPane(panel);
 					frame.revalidate();
 				}
@@ -181,7 +181,7 @@ public class Register extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				auth.setSuccess(false);
-				Login panel = new Login(frame, auth);
+				Login panel = new Login(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
@@ -243,8 +243,8 @@ public class Register extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) newPassTEXT).setEchoChar('Â•');
-				((JPasswordField) confirmPassTEXT).setEchoChar('Â•');
+				((JPasswordField) newPassTEXT).setEchoChar('•');
+				((JPasswordField) confirmPassTEXT).setEchoChar('•');
 			}
 		});
 

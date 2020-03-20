@@ -80,17 +80,17 @@ public class Login extends JPanel {
 				if (acc == null) {
 					lblInvalidLogin.setVisible(true);
 				} else {
-					int accNum = acc.getAccountType().getAccNum
+					int type = acc.getAccountType().getAccNum();
 
-					if (accNum == 0) {
+					if (type == 0) {
 						AuthorGUI panel = new AuthorGUI(db);
 						frame.setContentPane(panel);
 						frame.revalidate();
-					} else if (accNum == 1) {
+					} else if (type == 1) {
 						MainScreen panel = new MainScreen(frame, acc, auth);
 						frame.setContentPane(panel);
 						frame.revalidate();
-					} else if (accNum == 2) {
+					} else if (type == 2) {
 						EditorGUI panel = new EditorGUI();
 						frame.setContentPane(panel);
 						frame.revalidate();
@@ -201,7 +201,7 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) passwordTEXT).setEchoChar('â€¢');
+				((JPasswordField) passwordTEXT).setEchoChar('•');
 			}
 		});
 
