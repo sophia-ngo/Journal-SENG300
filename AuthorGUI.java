@@ -25,7 +25,6 @@ public class AuthorGUI extends JPanel {
 	public AuthorGUI(JFrame frame, Authenticator auth, Database db) {
 		setBackground(Color.WHITE);
 		setLayout(null);
-		db.dbLoad();
 
 		filenameTEXT = new JTextField();
 		filenameTEXT.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -61,6 +60,7 @@ public class AuthorGUI extends JPanel {
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				db.dbLoad();
 				Submission s1 = new Submission();
 				s1.submit(filenameTEXT.getText());
 				db.dbAdd("sub1", s1);
@@ -78,6 +78,7 @@ public class AuthorGUI extends JPanel {
 		btnDownload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				db.dbLoad();
 				Submission s1 = db.dbGet("sub1");
 				s1.download();
 			}
