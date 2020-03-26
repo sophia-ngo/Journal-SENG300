@@ -6,7 +6,9 @@ public class Submission implements Serializable{
 	
 	private byte[] bytesFromFile;
 	private AccountType acc = new AccountType();
-	
+	// user of submission
+	// nominated reviewer for submission, updated by editor
+	// feedback: major, critical, accept
 	
 	/*
 	public static byte[] getBytes(File f) throws FileNotFoundException, IOException{
