@@ -80,7 +80,7 @@ public class Login extends JPanel {
 				} else {
 					if(acc.getAccountType().getAccType().equals("Author"))
 					{
-						AuthorGUI panel = new AuthorGUI(db);
+						Author panel = new Author(acc, db);
 						frame.setContentPane(panel);
 						frame.revalidate();
 					} else {

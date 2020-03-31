@@ -24,9 +24,11 @@ public class Mainframe {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		AccountType at = new AccountType();
+		Account aAcc = new Account("Ishan", "123456789123456789", at);
 		Database db = new Database();
 		Login panel = new Login(frame, auth, db);
-		AuthorGUI paneltest = new AuthorGUI(db);
+		Author paneltest = new Author(aAcc, db);
 		frame.setContentPane(paneltest);
 		frame.revalidate();
 	}

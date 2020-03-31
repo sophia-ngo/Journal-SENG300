@@ -9,14 +9,15 @@ import java.awt.event.MouseEvent;
 
 
 
-public class AuthorGUI extends JPanel {
+public class Author extends JPanel {
 	private JTextField filenameTEXT;
+	private int counter = 0;
 	String filename = null;
 
 	/**
 	 * Create the panel.
 	 */
-	public AuthorGUI(Database db) {
+	public Author(Account aAcc, Database db) {
 		setLayout(null);
 		db.dbLoad();
 		
@@ -46,8 +47,9 @@ public class AuthorGUI extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Submission s1 = new Submission();
-				s1.submit(filenameTEXT.getText());
-				db.dbAdd("sub1",s1);
+				s1.submit(filenameTEXT.getText(), aAcc);
+				counter++;
+				db.dbAdd(aAcc.getUsername()+Integer.toString(counter),s1);
 				db.dbSave();
 			}
 		});
@@ -58,7 +60,7 @@ public class AuthorGUI extends JPanel {
 		btnDownload.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Submission s1 = db.dbGet("sub1");
+				Submission s1 = db.dbGet(aAcc.getUsername()+Integer.toString(counter));
 				s1.download();
 			}
 		});

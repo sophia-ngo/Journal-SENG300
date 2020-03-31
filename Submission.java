@@ -5,7 +5,8 @@ import java.nio.file.Files;
 public class Submission implements Serializable{
 	
 	private byte[] bytesFromFile;
-	private AccountType acc = new AccountType();
+	private Account authorAccount;
+	private Account reviewerAccount;
 	
 	
 	/*
@@ -22,8 +23,9 @@ public class Submission implements Serializable{
 		return os.toByteArray();
 	}*/
 	
-	public boolean submit(String path){
+	public boolean submit(String path, Account aAcc){
 		try {
+			this.authorAccount = aAcc;
 			File f = new File(path);
 			this.bytesFromFile = Files.readAllBytes(f.toPath());
 			System.out.println(bytesFromFile.length);
@@ -34,7 +36,7 @@ public class Submission implements Serializable{
 	}
 	
 	public boolean download() {
-		File destination = new File("download.pdf");
+		File destination = new File(authorAccount.getUsername()+".pdf");
 		try {
 			Files.write(destination.toPath(), bytesFromFile);
 			return true;

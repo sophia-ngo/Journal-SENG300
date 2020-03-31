@@ -1,4 +1,6 @@
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable{
 	
 	private String username;
 	
@@ -26,8 +28,8 @@ public class Account {
 		this.accType = accType;
 	}
 
-	protected String getUsername() {
-		return username;
+	public String getUsername() {
+		return this.username;
 	}
 
 	protected boolean setUsername(String username) {
