@@ -22,7 +22,7 @@ public class AuthorGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AuthorGUI(JFrame frame, Authenticator auth, Database db) {
+	public AuthorGUI(JFrame frame, Authenticator auth, Database db, Account acc) {
 		setBackground(Color.WHITE);
 		setLayout(null);
 
@@ -62,7 +62,7 @@ public class AuthorGUI extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				db.dbLoad();
 				Submission s1 = new Submission();
-				s1.submit(filenameTEXT.getText());
+				s1.submit(filenameTEXT.getText(), acc);
 				db.dbAdd("sub1", s1);
 				db.dbSave();
 			}
