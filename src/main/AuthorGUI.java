@@ -92,7 +92,7 @@ public class AuthorGUI extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				db.dbLoad();
 				Submission s1 = new Submission();
-				s1.submit(filenameTEXT.getText());
+				s1.submit(filenameTEXT.getText(), acc);
 				db.dbAdd("sub1", s1);
 				db.dbSave();
 			}
@@ -151,7 +151,7 @@ public class AuthorGUI extends JPanel {
 		add(dateChooser);
 
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(AuthorGUI.class.getResource("/images/uofclogosmall.png")));
+		lblLogo.setIcon(new ImageIcon(AuthorGUI.class.getResource("/uofclogosmall.png")));
 		lblLogo.setBounds(457, 167, 94, 110);
 		add(lblLogo);
 
