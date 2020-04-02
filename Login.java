@@ -82,7 +82,7 @@ public class Login extends JPanel {
 					String type = acc.getAccountType().getAccType();
 
 					if (type.equals("Author")) {
-						AuthorGUI panel = new AuthorGUI(frame, auth, db);
+						AuthorGUI panel = new AuthorGUI(frame, acc, auth, db);
 						frame.setContentPane(panel);
 						frame.revalidate();
 					} else if (type.equals("Reviewer")) {
@@ -159,12 +159,6 @@ public class Login extends JPanel {
 		lblRegisterToday.setBounds(186, 411, 228, 29);
 		add(lblRegisterToday);
 
-		JLabel lblYellowBlock = new JLabel("");
-		lblYellowBlock.setOpaque(true);
-		lblYellowBlock.setBackground(new Color(255, 217, 17));
-		lblYellowBlock.setBounds(0, 400, 600, 400);
-		add(lblYellowBlock);
-
 		JLabel lblForWritersEditors = new JLabel("For authors, reviewers, editors.");
 		lblForWritersEditors.setHorizontalAlignment(SwingConstants.CENTER);
 		lblForWritersEditors.setForeground(Color.WHITE);
@@ -178,12 +172,23 @@ public class Login extends JPanel {
 		lblUJournal.setFont(new Font("Arial", Font.BOLD, 40));
 		lblUJournal.setBounds(0, 298, 600, 42);
 		add(lblUJournal);
-
-		JLabel lblRedBlock = new JLabel("");
-		lblRedBlock.setOpaque(true);
-		lblRedBlock.setBackground(new Color(231, 43, 46));
-		lblRedBlock.setBounds(0, 0, 600, 400);
-		add(lblRedBlock);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/uofclogosmall.png")));
+		lblNewLabel.setBounds(850, 638, 76, 98);
+		add(lblNewLabel);
+		
+				JLabel lblRedBlock = new JLabel("");
+				lblRedBlock.setOpaque(true);
+				lblRedBlock.setBackground(new Color(231, 43, 46));
+				lblRedBlock.setBounds(0, 0, 600, 400);
+				add(lblRedBlock);
+				
+						JLabel lblYellowBlock = new JLabel("");
+						lblYellowBlock.setOpaque(true);
+						lblYellowBlock.setBackground(new Color(255, 217, 17));
+						lblYellowBlock.setBounds(0, 400, 600, 400);
+						add(lblYellowBlock);
 
 		hidePass.setVisible(false);
 		showPass.addMouseListener(new MouseAdapter() {
