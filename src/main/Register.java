@@ -1,3 +1,5 @@
+package main;
+
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JFrame;
@@ -11,6 +13,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -200,7 +203,7 @@ public class Register extends JPanel {
 		
 		JLabel showPass = new JLabel("");
 		showPass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		showPass.setIcon(new ImageIcon(Register.class.getResource("/images/eye.png")));
+		showPass.setIcon(new ImageIcon(Register.class.getResource("/eye.png")));
 		showPass.setHorizontalAlignment(SwingConstants.CENTER);
 		showPass.setFont(new Font("Arial", Font.BOLD, 22));
 		showPass.setBounds(858, 340, 39, 22);
@@ -208,7 +211,7 @@ public class Register extends JPanel {
 		
 		JLabel hidePass = new JLabel("");
 		hidePass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		hidePass.setIcon(new ImageIcon(Register.class.getResource("/images/eyecross.png")));
+		hidePass.setIcon(new ImageIcon(Register.class.getResource("/eyecross.png")));
 		hidePass.setHorizontalAlignment(SwingConstants.CENTER);
 		hidePass.setFont(new Font("Arial", Font.BOLD, 22));
 		hidePass.setBounds(858, 340, 39, 22);

@@ -1,3 +1,5 @@
+package main;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -10,8 +12,10 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+
 import java.awt.Cursor;
 import javax.swing.JPasswordField;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -138,7 +142,7 @@ public class Login extends JPanel {
 		JLabel showPass = new JLabel("");
 		showPass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-		showPass.setIcon(new ImageIcon(Login.class.getResource("/images/eye.png")));
+		showPass.setIcon(new ImageIcon(Login.class.getResource("/eye.png")));
 		showPass.setHorizontalAlignment(SwingConstants.CENTER);
 		showPass.setFont(new Font("Arial", Font.BOLD, 22));
 		showPass.setBounds(1115, 450, 39, 22);
@@ -146,7 +150,7 @@ public class Login extends JPanel {
 
 		JLabel hidePass = new JLabel("");
 		hidePass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		hidePass.setIcon(new ImageIcon(Login.class.getResource("/images/eyecross.png")));
+		hidePass.setIcon(new ImageIcon(Login.class.getResource("/eyecross.png")));
 		hidePass.setHorizontalAlignment(SwingConstants.CENTER);
 		hidePass.setFont(new Font("Arial", Font.BOLD, 22));
 		hidePass.setBounds(1115, 450, 39, 22);
@@ -174,7 +178,7 @@ public class Login extends JPanel {
 		add(lblUJournal);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/images/uofclogosmall.png")));
+		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/uofclogosmall.png")));
 		lblNewLabel.setBounds(850, 638, 76, 98);
 		add(lblNewLabel);
 		
@@ -205,7 +209,7 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) passwordTEXT).setEchoChar('ï¿½');
+				((JPasswordField) passwordTEXT).setEchoChar('•');
 			}
 		});
 
