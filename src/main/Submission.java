@@ -7,6 +7,8 @@ import java.nio.file.Files;
 public class Submission implements Serializable{
 	
 	private byte[] bytesFromFile;
+	private String authorUser;
+	private String reviewerUser;
 	private AccountType acc = new AccountType();
 	// user of submission
 	// nominated reviewer for submission, updated by editor
@@ -26,11 +28,13 @@ public class Submission implements Serializable{
 		return os.toByteArray();
 	}*/
 	
-	public boolean submit(String path){
+	public boolean submit(String path, Account acc){
 		try {
 			File f = new File(path);
 			this.bytesFromFile = Files.readAllBytes(f.toPath());
 			System.out.println(bytesFromFile.length);
+			this.authorUser = acc.getUsername();
+			this.acc = acc.getAccountType();
 			return true;
 		}catch(Exception e) {
 			return false;
