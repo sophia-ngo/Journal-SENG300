@@ -205,7 +205,7 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) passwordTEXT).setEchoChar('•');
+				((JPasswordField) passwordTEXT).setEchoChar('ï¿½');
 			}
 		});
 

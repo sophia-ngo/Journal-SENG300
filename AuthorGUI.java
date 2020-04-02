@@ -64,7 +64,7 @@ public class AuthorGUI extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				db.dbLoad();
 				Submission s1 = new Submission();
-				s1.submit(filenameTEXT.getText());
+				s1.submit(filenameTEXT.getText(), acc);
 				db.dbAdd("sub1", s1);
 				db.dbSave();
 			}
