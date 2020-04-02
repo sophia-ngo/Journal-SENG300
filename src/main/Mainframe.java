@@ -1,3 +1,5 @@
+package main;
+
 import java.awt.EventQueue;
 import java.awt.image.BufferedImage;
 import javax.swing.JFrame;

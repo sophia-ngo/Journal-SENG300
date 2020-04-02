@@ -1,3 +1,5 @@
+package main;
+
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JFrame;
@@ -11,6 +13,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;

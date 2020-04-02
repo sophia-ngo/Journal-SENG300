@@ -1,3 +1,5 @@
+package main;
+
 /**
  * Account storage of username, password, and account type.
  * 
