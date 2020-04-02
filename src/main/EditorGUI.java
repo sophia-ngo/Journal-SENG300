@@ -1,12 +1,10 @@
 package main;
 
 import javax.swing.JPanel;
-import javax.swing.JList;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.JButton;
@@ -17,17 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.awt.Font;
 
 public class EditorGUI extends JPanel {
 
@@ -106,6 +98,7 @@ public class EditorGUI extends JPanel {
 			}
 		});
 		btnAssign.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});

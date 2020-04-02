@@ -15,7 +15,6 @@ import javax.swing.border.MatteBorder;
 
 import java.awt.Cursor;
 import javax.swing.JPasswordField;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -123,7 +122,7 @@ public class Login extends JPanel {
 
 		passwordTEXT = new JPasswordField();
 		passwordTEXT.setBackground(new Color(245, 245, 245));
-		passwordTEXT.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
+		passwordTEXT.setBorder(new MatteBorder(0, 0, 2, 0, new Color(180, 180, 180)));
 		passwordTEXT.setBounds(661, 445, 449, 36);
 		add(passwordTEXT);
 
@@ -132,7 +131,7 @@ public class Login extends JPanel {
 
 		usernameTEXT = new JTextField();
 		usernameTEXT.setBackground(new Color(245, 245, 245));
-		usernameTEXT.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
+		usernameTEXT.setBorder(new MatteBorder(0, 0, 2, 0, new Color(180, 180, 180)));
 		usernameTEXT.setBounds(661, 311, 449, 36);
 		add(usernameTEXT);
 
@@ -200,7 +199,7 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 				showPass.setVisible(false);
 				hidePass.setVisible(true);
-				((JPasswordField) passwordTEXT).setEchoChar((char) 0);
+				passwordTEXT.setEchoChar((char) 0);
 			}
 		});
 
@@ -209,7 +208,7 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) passwordTEXT).setEchoChar('•');
+				passwordTEXT.setEchoChar('•');
 			}
 		});
 

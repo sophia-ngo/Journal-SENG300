@@ -1,7 +1,6 @@
 package main;
 
 import java.awt.EventQueue;
-import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 /**
@@ -15,6 +14,7 @@ public class Mainframe {
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					auth.checkAccounts();

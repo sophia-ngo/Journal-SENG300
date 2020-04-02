@@ -3,7 +3,6 @@ package main;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -22,19 +21,8 @@ import java.awt.Cursor;
 import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.ImageIcon;
-import com.toedter.calendar.JDayChooser;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-
-import java.awt.Component;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.JComboBox;
-import javax.swing.ListSelectionModel;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 import java.awt.event.ActionListener;
@@ -222,6 +210,7 @@ public class AuthorGUI extends JPanel {
 		JButton btnAdd = new JButton(">>");
 		DefaultListModel<String> listModel = new DefaultListModel<String>(); // list model to add to Jlist
 		btnAdd.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String selected = (String) reviewerComboBox.getSelectedItem(); // gets current selected item
 				if (!listModel.contains(selected)) {
@@ -244,6 +233,7 @@ public class AuthorGUI extends JPanel {
 
 		JButton btnRemove = new JButton("<<");
 		btnRemove.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String selected = (String) reviewerList.getSelectedValue();
 				listModel.removeElement(selected);

@@ -58,7 +58,7 @@ public class Register extends JPanel {
 		newuserTEXT = new JTextField();
 		newuserTEXT.setFont(new Font("Arial", Font.PLAIN, 16));
 		newuserTEXT.setColumns(10);
-		newuserTEXT.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
+		newuserTEXT.setBorder(new MatteBorder(0, 0, 2, 0, new Color(180, 180, 180)));
 		newuserTEXT.setBackground(new Color(245, 245, 245));
 		newuserTEXT.setBounds(348, 227, 504, 34);
 		add(newuserTEXT);
@@ -67,7 +67,7 @@ public class Register extends JPanel {
 		newPassTEXT = new JPasswordField();
 		newPassTEXT.setFont(new Font("Arial", Font.PLAIN, 16));
 		newPassTEXT.setColumns(10);
-		newPassTEXT.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
+		newPassTEXT.setBorder(new MatteBorder(0, 0, 2, 0, new Color(180, 180, 180)));
 		newPassTEXT.setBackground(new Color(245, 245, 245));
 		newPassTEXT.setBounds(348, 335, 504, 34);
 		add(newPassTEXT);
@@ -77,7 +77,7 @@ public class Register extends JPanel {
 		confirmPassTEXT.setDisabledTextColor(Color.LIGHT_GRAY);
 		confirmPassTEXT.setFont(new Font("Arial", Font.PLAIN, 16));
 		confirmPassTEXT.setColumns(10);
-		confirmPassTEXT.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(180, 180, 180)));
+		confirmPassTEXT.setBorder(new MatteBorder(0, 0, 2, 0, new Color(180, 180, 180)));
 		confirmPassTEXT.setBackground(new Color(245, 245, 245));
 		confirmPassTEXT.setBounds(348, 433, 504, 34);
 		add(confirmPassTEXT);
