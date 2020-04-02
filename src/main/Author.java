@@ -139,7 +139,7 @@ public class Author extends JPanel {
 		add(dateChooser);
 
 		JLabel lblLogo = new JLabel("");
-		lblLogo.setIcon(new ImageIcon(AuthorGUI.class.getResource("/uofclogosmall.png")));
+		lblLogo.setIcon(new ImageIcon(Author.class.getResource("/uofclogosmall.png")));
 		lblLogo.setBounds(457, 167, 94, 110);
 		add(lblLogo);
 
