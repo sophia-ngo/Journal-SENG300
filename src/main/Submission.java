@@ -9,8 +9,8 @@ public class Submission implements Serializable{
 	private byte[] bytesFromFile;
 	private String authorUser;
 	private String reviewerUser;
-	private AccountType acc = new AccountType();
 	private Account authorAccount;
+	private Account reviewerAccount;
 	// user of submission
 	// nominated reviewer for submission, updated by editor
 	// feedback: major, critical, accept
@@ -35,8 +35,6 @@ public class Submission implements Serializable{
 			File f = new File(path);
 			this.bytesFromFile = Files.readAllBytes(f.toPath());
 			System.out.println(bytesFromFile.length);
-			this.authorUser = acc.getUsername();
-			this.acc = acc.getAccountType();
 			return true;
 		}catch(Exception e) {
 			return false;
