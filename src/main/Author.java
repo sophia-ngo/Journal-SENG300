@@ -28,7 +28,7 @@ import javax.swing.DefaultListModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AuthorGUI extends JPanel {
+public class Author extends JPanel {
 	/**
 	 * 
 	 */
@@ -39,7 +39,7 @@ public class AuthorGUI extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AuthorGUI(JFrame frame, Account acc, Authenticator auth, Database db) {
+	public Author(JFrame frame, Account acc, Authenticator auth, Database db) {
 		setBackground(Color.WHITE);
 		setLayout(null);
 

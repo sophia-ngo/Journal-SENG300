@@ -1,16 +1,18 @@
 package main;
 
+import java.io.Serializable;
+
 /**
  * Account storage of username, password, and account type.
  * 
  * @author Group 2
  */
-public class Account {
+public class Account implements Serializable {
 
 	private String username;
 	private String password;
 	private AccountType accType;
-	
+
 	public static boolean checkUsername(String username) {
 		if (username.length() >= 4) {
 			return true;
@@ -31,8 +33,8 @@ public class Account {
 		this.accType = accType;
 	}
 
-	protected String getUsername() {
-		return username;
+	public String getUsername() {
+		return this.username;
 	}
 
 	/**
