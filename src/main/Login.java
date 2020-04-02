@@ -85,7 +85,7 @@ public class Login extends JPanel {
 					String type = acc.getAccountType().getAccType();
 
 					if (type.equals("Author")) {
-						AuthorGUI panel = new AuthorGUI(frame, acc, auth, db);
+						Author panel = new Author(frame, acc, auth, db);
 						frame.setContentPane(panel);
 						frame.revalidate();
 					} else if (type.equals("Reviewer")) {

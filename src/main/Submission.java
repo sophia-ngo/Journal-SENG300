@@ -10,6 +10,7 @@ public class Submission implements Serializable{
 	private String authorUser;
 	private String reviewerUser;
 	private AccountType acc = new AccountType();
+	private Account authorAccount;
 	// user of submission
 	// nominated reviewer for submission, updated by editor
 	// feedback: major, critical, accept
@@ -30,6 +31,7 @@ public class Submission implements Serializable{
 	
 	public boolean submit(String path, Account acc){
 		try {
+			this.authorAccount = acc;
 			File f = new File(path);
 			this.bytesFromFile = Files.readAllBytes(f.toPath());
 			System.out.println(bytesFromFile.length);
@@ -42,7 +44,7 @@ public class Submission implements Serializable{
 	}
 	
 	public boolean download() {
-		File destination = new File("download.pdf");
+		File destination = new File(authorAccount.getUsername() + ".pdf");
 		try {
 			Files.write(destination.toPath(), bytesFromFile);
 			return true;
