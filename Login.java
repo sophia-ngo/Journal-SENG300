@@ -82,7 +82,7 @@ public class Login extends JPanel {
 					String type = acc.getAccountType().getAccType();
 
 					if (type.equals("Author")) {
-						AuthorGUI panel = new AuthorGUI(frame, auth, db);
+						AuthorGUI panel = new AuthorGUI(frame, auth, db, acc);
 						frame.setContentPane(panel);
 						frame.revalidate();
 					} else if (type.equals("Reviewer")) {
@@ -200,7 +200,7 @@ public class Login extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				hidePass.setVisible(false);
 				showPass.setVisible(true);
-				((JPasswordField) passwordTEXT).setEchoChar('•');
+				((JPasswordField) passwordTEXT).setEchoChar('ï¿½');
 			}
 		});
 

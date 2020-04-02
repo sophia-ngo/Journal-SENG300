@@ -2,3 +2,4 @@ editor asdasdasd 2
 author asdasdasd 0
 reviewer asdasdasd 1
 username password 0
+admin 12345678 0
