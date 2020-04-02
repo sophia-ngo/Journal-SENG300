@@ -95,7 +95,7 @@ public class EditorGUI extends JPanel {
 		btnAssign.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		btnAssign.setBackground(new Color(245, 245, 245));
 		btnAssign.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAssign.setBounds(628, 376, 154, 29);
+		btnAssign.setBounds(531, 429, 154, 29);
 		btnAssign.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

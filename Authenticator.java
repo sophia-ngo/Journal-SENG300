@@ -47,6 +47,7 @@ public class Authenticator {
 			e.printStackTrace();
 		}
 	}
+	
 	public boolean checkSameUser(String username) {
 		if (accounts.containsKey(username)) {
 			return true;
