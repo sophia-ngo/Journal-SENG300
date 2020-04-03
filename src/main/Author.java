@@ -46,9 +46,28 @@ public class Author extends JPanel {
 		filenameTEXT = new JTextField();
 		filenameTEXT.setBackground(new Color(245, 245, 245));
 		filenameTEXT.setFont(new Font("Arial", Font.PLAIN, 12));
-		filenameTEXT.setBounds(460, 377, 267, 26);
+		filenameTEXT.setBounds(634, 381, 267, 26);
 		add(filenameTEXT);
 		filenameTEXT.setColumns(10);
+		
+		JLabel lblSuccess = new JLabel("Successfully submitted!");
+		lblSuccess.setForeground(new Color(51, 204, 0));
+		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSuccess.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblSuccess.setBounds(646, 598, 182, 26);
+		add(lblSuccess);
+		lblSuccess.setVisible(false);
+		
+		// Sets paper name if there is one submitted
+		JLabel lblPaper = new JLabel("Paper submitted: ");
+		try {
+			lblPaper.setText("Paper submitted: " + db.dbGet("sub1").getPaperTitle());
+		} catch(Exception e) {
+			lblPaper.setText("Paper submitted: None");
+		}
+		lblPaper.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblPaper.setBounds(468, 222, 534, 26);
+		add(lblPaper);
 
 		JButton btnChooseFile = new JButton("...");
 		btnChooseFile.setBackground(new Color(245, 245, 245));
@@ -67,26 +86,8 @@ public class Author extends JPanel {
 				filenameTEXT.setText(filename);
 			}
 		});
-		btnChooseFile.setBounds(737, 374, 41, 29);
+		btnChooseFile.setBounds(911, 378, 41, 29);
 		add(btnChooseFile);
-
-		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setBackground(new Color(245, 245, 245));
-		btnSubmit.setFont(new Font("Arial", Font.BOLD, 16));
-		btnSubmit.setBorder(new LineBorder(new Color(192, 192, 192)));
-		btnSubmit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnSubmit.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				db.dbLoad();
-				Submission s1 = new Submission();
-				s1.submit(filenameTEXT.getText(), acc);
-				db.dbAdd("sub1", s1);
-				db.dbSave();
-			}
-		});
-		btnSubmit.setBounds(462, 627, 276, 28);
-		add(btnSubmit);
 
 		JButton btnDownload = new JButton("Download");
 		btnDownload.setBackground(new Color(245, 245, 245));
@@ -101,13 +102,13 @@ public class Author extends JPanel {
 				s1.download();
 			}
 		});
-		btnDownload.setBounds(561, 270, 161, 28);
+		btnDownload.setBounds(468, 259, 161, 28);
 		add(btnDownload);
 
-		JLabel lblAccountType = new JLabel("Author Account");
-		lblAccountType.setForeground(Color.WHITE);
+		JLabel lblAccountType = new JLabel("Type: Author");
+		lblAccountType.setForeground(Color.BLACK);
 		lblAccountType.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblAccountType.setBounds(10, 11, 117, 16);
+		lblAccountType.setBounds(144, 496, 117, 41);
 		add(lblAccountType);
 
 		JLabel lblLogout = new JLabel("<HTML><U>Logout</U></HTML>");
@@ -120,64 +121,56 @@ public class Author extends JPanel {
 				frame.revalidate();
 			}
 		});
-		lblLogout.setForeground(Color.WHITE);
+		lblLogout.setForeground(Color.BLACK);
 		lblLogout.setFont(new Font("19ial", Font.PLAIN, 16));
-		lblLogout.setBounds(1119, 11, 57, 17);
+		lblLogout.setBounds(128, 635, 57, 35);
 		add(lblLogout);
 
 		JLabel lblUJournal = new JLabel("UJournal");
-		lblUJournal.setForeground(Color.WHITE);
 		lblUJournal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUJournal.setForeground(Color.WHITE);
 		lblUJournal.setFont(new Font("Arial", Font.BOLD, 40));
-		lblUJournal.setBounds(500, 48, 199, 42);
+		lblUJournal.setBounds(501, 0, 199, 122);
 		add(lblUJournal);
 
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBackground(new Color(245, 245, 245));
 		dateChooser.setFont(new Font("Arial", Font.PLAIN, 16));
-		dateChooser.setBounds(497, 436, 161, 26);
+		dateChooser.setBounds(633, 433, 161, 26);
 		add(dateChooser);
 
 		JLabel lblLogo = new JLabel("");
+		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo.setIcon(new ImageIcon(Author.class.getResource("/uofclogosmall.png")));
-		lblLogo.setBounds(457, 167, 94, 110);
+		lblLogo.setBounds(128, 222, 236, 199);
 		add(lblLogo);
 
-		JLabel lblRedBlock = new JLabel("");
-		lblRedBlock.setOpaque(true);
-		lblRedBlock.setBackground(new Color(231, 43, 46));
-		lblRedBlock.setBounds(0, 0, 1200, 122);
-		add(lblRedBlock);
-
 		JLabel lblUser = new JLabel("Hello " + acc.getUsername() + "!");
-		lblUser.setForeground(Color.BLACK);
-		lblUser.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblUser.setBounds(561, 179, 131, 26);
+		lblUser.setForeground(Color.WHITE);
+		lblUser.setFont(new Font("Arial", Font.BOLD, 20));
+		lblUser.setBounds(144, 433, 209, 41);
 		add(lblUser);
 
-		JLabel lblStatus = new JLabel("Status: Accepted!");
+		JLabel lblStatus = new JLabel("Status: ");
+		
+		lblStatus.setForeground(Color.BLACK);
 		lblStatus.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblStatus.setBounds(561, 206, 137, 26);
+		lblStatus.setBounds(144, 530, 137, 41);
 		add(lblStatus);
 
-		JLabel lblPaper = new JLabel("Paper submitted: None");
-		lblPaper.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblPaper.setBounds(561, 233, 171, 26);
-		add(lblPaper);
-
-		JLabel lblPublication = new JLabel("Publication deadline:");
+		JLabel lblPublication = new JLabel("Publication Deadline:");
 		lblPublication.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblPublication.setBounds(332, 436, 155, 26);
+		lblPublication.setBounds(468, 433, 155, 26);
 		add(lblPublication);
 
-		JLabel lblSubmitAPaper = new JLabel("Submit a paper:");
-		lblSubmitAPaper.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblSubmitAPaper.setBounds(331, 374, 131, 26);
+		JLabel lblSubmitAPaper = new JLabel("Submit a Paper");
+		lblSubmitAPaper.setFont(new Font("Arial", Font.BOLD, 20));
+		lblSubmitAPaper.setBounds(468, 322, 534, 26);
 		add(lblSubmitAPaper);
 
-		JLabel lblNominate = new JLabel("Nominate reviewers:");
+		JLabel lblNominate = new JLabel("Nominate Reviewers:");
 		lblNominate.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNominate.setBounds(331, 499, 155, 26);
+		lblNominate.setBounds(468, 493, 155, 26);
 		add(lblNominate);
 
 		JComboBox<String> reviewerComboBox = new JComboBox<String>();
@@ -204,7 +197,7 @@ public class Author extends JPanel {
 		}
 		reviewerComboBox.setBackground(new Color(245, 245, 245));
 		reviewerComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
-		reviewerComboBox.setBounds(496, 499, 146, 26);
+		reviewerComboBox.setBounds(634, 493, 146, 26);
 		add(reviewerComboBox);
 
 		JButton btnAdd = new JButton(">>");
@@ -213,7 +206,7 @@ public class Author extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String selected = (String) reviewerComboBox.getSelectedItem(); // gets current selected item
-				if (!listModel.contains(selected)) {
+				if (!listModel.contains(selected) && listModel.getSize() < 3) {
 					listModel.addElement(selected);
 				}
 
@@ -222,12 +215,14 @@ public class Author extends JPanel {
 		btnAdd.setFont(new Font("Arial", Font.BOLD, 16));
 		btnAdd.setBorder(new LineBorder(new Color(192, 192, 192)));
 		btnAdd.setBackground(new Color(245, 245, 245));
-		btnAdd.setBounds(652, 498, 69, 29);
+		btnAdd.setBounds(790, 492, 69, 29);
 		add(btnAdd);
 		
 		JList reviewerList = new JList(listModel);
+		reviewerList.setVisibleRowCount(3);
+		reviewerList.setBackground(new Color(245, 245, 245));
 		reviewerList.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		reviewerList.setBounds(733, 499, 131, 67);
+		reviewerList.setBounds(871, 493, 131, 67);
 		reviewerList.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(reviewerList);
 
@@ -242,8 +237,57 @@ public class Author extends JPanel {
 		btnRemove.setFont(new Font("Arial", Font.BOLD, 16));
 		btnRemove.setBorder(new LineBorder(new Color(192, 192, 192)));
 		btnRemove.setBackground(new Color(245, 245, 245));
-		btnRemove.setBounds(652, 536, 69, 29);
+		btnRemove.setBounds(790, 530, 69, 29);
 		add(btnRemove);
+		
+		JLabel lblYellowBlock = new JLabel("");
+		lblYellowBlock.setOpaque(true);
+		lblYellowBlock.setBackground(new Color(255, 217, 17));
+		lblYellowBlock.setBounds(128, 485, 236, 94);
+		add(lblYellowBlock);
+		
+		JLabel lblRedBlock = new JLabel("");
+		lblRedBlock.setOpaque(true);
+		lblRedBlock.setBackground(new Color(231, 43, 46));
+		lblRedBlock.setBounds(128, 421, 236, 67);
+		add(lblRedBlock);
+		
+		JLabel lblYellowVert = new JLabel("");
+		lblYellowVert.setOpaque(true);
+		lblYellowVert.setBackground((new Color(255, 217, 17)));
+		lblYellowVert.setBounds(434, 222, 12, 441);
+		add(lblYellowVert);
+		
+		JLabel lblFile = new JLabel("Upload:");
+		lblFile.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblFile.setBounds(468, 381, 155, 26);
+		add(lblFile);
+		
+		JLabel lblRedHorz = new JLabel("");
+		lblRedHorz.setOpaque(true);
+		lblRedHorz.setBackground(new Color(231, 43, 46));
+		lblRedHorz.setBounds(0, 0, 1200, 122);
+		add(lblRedHorz);
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setBackground(new Color(245, 245, 245));
+		btnSubmit.setFont(new Font("Arial", Font.BOLD, 16));
+		btnSubmit.setBorder(new LineBorder(new Color(192, 192, 192)));
+		btnSubmit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnSubmit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				db.dbLoad();
+				Submission s1 = new Submission();
+				s1.submit(filenameTEXT.getText(), acc, listModel);
+				db.dbAdd("sub1", s1);
+				db.dbSave();
+				lblSuccess.setVisible(true);
+				lblPaper.setText("Paper submitted: " + s1.getPaperTitle());
+			}
+		});
+		btnSubmit.setBounds(599, 635, 276, 28);
+		add(btnSubmit);
 
 	}
 }

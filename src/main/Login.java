@@ -93,7 +93,7 @@ public class Login extends JPanel {
 						frame.setContentPane(panel);
 						frame.revalidate();
 					} else if (type.equals("Editor")) {
-						EditorGUI panel = new EditorGUI(frame, auth);
+						EditorGUI panel = new EditorGUI(frame, acc, auth, db);
 						frame.setContentPane(panel);
 						frame.revalidate();
 					}
@@ -178,20 +178,20 @@ public class Login extends JPanel {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/uofclogosmall.png")));
-		lblNewLabel.setBounds(850, 638, 76, 98);
+		lblNewLabel.setBounds(829, 63, 154, 157);
 		add(lblNewLabel);
 		
-				JLabel lblRedBlock = new JLabel("");
-				lblRedBlock.setOpaque(true);
-				lblRedBlock.setBackground(new Color(231, 43, 46));
-				lblRedBlock.setBounds(0, 0, 600, 400);
-				add(lblRedBlock);
-				
-						JLabel lblYellowBlock = new JLabel("");
-						lblYellowBlock.setOpaque(true);
-						lblYellowBlock.setBackground(new Color(255, 217, 17));
-						lblYellowBlock.setBounds(0, 400, 600, 400);
-						add(lblYellowBlock);
+		JLabel lblRedBlock = new JLabel("");
+		lblRedBlock.setOpaque(true);
+		lblRedBlock.setBackground(new Color(231, 43, 46));
+		lblRedBlock.setBounds(0, 0, 600, 400);
+		add(lblRedBlock);
+		
+		JLabel lblYellowBlock = new JLabel("");
+		lblYellowBlock.setOpaque(true);
+		lblYellowBlock.setBackground(new Color(255, 217, 17));
+		lblYellowBlock.setBounds(0, 400, 600, 400);
+		add(lblYellowBlock);
 
 		hidePass.setVisible(false);
 		showPass.addMouseListener(new MouseAdapter() {

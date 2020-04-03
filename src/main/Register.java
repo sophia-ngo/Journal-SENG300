@@ -97,7 +97,7 @@ public class Register extends JPanel {
 		add(lblPasswordDoesntMatch);
 		lblPasswordDoesntMatch.setVisible(false);
 
-		JLabel lblInvalidUsername = new JLabel("Username must be minimum of 4 characters.");
+		JLabel lblInvalidUsername = new JLabel("Username must be between 4-12 characters.");
 		lblInvalidUsername.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblInvalidUsername.setForeground(new Color(255, 51, 51));
 		lblInvalidUsername.setBounds(348, 260, 319, 26);
