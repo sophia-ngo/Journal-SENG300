@@ -8,8 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class EditorChooseReviewer {
-	
-
 
 		public static String reviewers[] = { };
 		
@@ -17,7 +15,7 @@ public class EditorChooseReviewer {
 			List<String> reviewers = Collections.emptyList(); 
 			try 
 			{ 
-				reviewers = Files.readAllLines(Paths.get("usernames.txt"), StandardCharsets.UTF_8); 
+				reviewers = Files.readAllLines(Paths.get("username.txt"), StandardCharsets.UTF_8); 
 			} catch 
 				(IOException e) { 
 				// TODO Auto-generated catch block 

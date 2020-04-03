@@ -14,7 +14,7 @@ public class Account implements Serializable {
 	private AccountType accType;
 
 	public static boolean checkUsername(String username) {
-		if (username.length() >= 4) {
+		if (username.length() >= 4 && username.length() <= 12) {
 			return true;
 		}
 		return false;
