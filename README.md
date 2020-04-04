@@ -20,5 +20,5 @@ If a user does not have an account yet.
 Congratulations you have registered! Now the user will be redirected back to the login screen.
 
 ## References
-LoginApplication by colinauyeung
+LoginApplication by colinauyeung\
 Most material referenced from tutorials.
