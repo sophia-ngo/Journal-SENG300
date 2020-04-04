@@ -1,7 +1,7 @@
-# Journal-SENG300
-Journal submission system for SENG 300.
+# Journal Submission System
+Project for SENG 300, created by group 2.
 
-## How to Run the Program
+## Getting Started
 1. Download "Journal.jar" on local machine
 2. Double click to run the program.
 
@@ -19,8 +19,6 @@ If a user does not have an account yet.
 4. Click "Register."\
 Congratulations you have registered! Now the user will be redirected back to the login screen.
 
-Note: Most material referenced from tutorials.
-
 ## References
-LoginApplication
-credit colinauyeung
+LoginApplication by colinauyeung
+Most material referenced from tutorials.
