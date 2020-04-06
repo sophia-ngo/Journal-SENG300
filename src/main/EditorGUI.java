@@ -77,7 +77,7 @@ public class EditorGUI extends JPanel {
 		lblSelectReviewer.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(lblSelectReviewer);
 
-		JComboBox<String> Reviewerlist = new JComboBox<String>(Reviewers);
+		JComboBox<String> Reviewerlist = new JComboBox<String>();
 		// Checks if submission exists
 		try {
 			int sizeList = db.dbGet("sub1").getNomReviewers().getSize();
@@ -91,7 +91,7 @@ public class EditorGUI extends JPanel {
 		Reviewerlist.setFont(new Font("Arial", Font.PLAIN, 16));
 		Reviewerlist.setBackground(Color.WHITE);
 		Reviewerlist.setBorder(null);
-		Reviewerlist.setBounds(660, 442, 154, 26);
+		Reviewerlist.setBounds(660, 442, 219, 26);
 		Reviewerlist.setEditable(true);
 		Reviewerlist.setMaximumRowCount(100);
 		add(Reviewerlist);
@@ -120,12 +120,13 @@ public class EditorGUI extends JPanel {
 		lblSelectPaper.setBounds(503, 371, 122, 26);
 		add(lblSelectPaper);
 
-		String[] Submissions = {};
-		JComboBox comboBoxSelectPaper = new JComboBox();
+		db.dbLoad();
+		String[] Submissions = db.getSubmissions();
+		JComboBox comboBoxSelectPaper = new JComboBox(Submissions);
 		comboBoxSelectPaper.setBackground(Color.WHITE);
 		comboBoxSelectPaper.setFont(new Font("Arial", Font.PLAIN, 16));
 		comboBoxSelectPaper.setBorder(null);
-		comboBoxSelectPaper.setBounds(660, 371, 154, 26);
+		comboBoxSelectPaper.setBounds(660, 371, 219, 26);
 		add(comboBoxSelectPaper);
 		add(btnAssign);
 
