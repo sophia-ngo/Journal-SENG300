@@ -120,7 +120,11 @@ public class EditorGUI extends JPanel {
 		lblSelectPaper.setBounds(503, 371, 122, 26);
 		add(lblSelectPaper);
 
-		db.dbLoad();
+		try {
+			db.dbLoad();
+		}catch(Exception e) {
+			
+		}
 		String[] Submissions = db.getSubmissions();
 		JComboBox comboBoxSelectPaper = new JComboBox(Submissions);
 		comboBoxSelectPaper.setBackground(Color.WHITE);
