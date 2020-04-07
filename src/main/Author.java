@@ -153,12 +153,15 @@ public class Author extends JPanel {
 		lblUser.setBounds(144, 433, 209, 41);
 		add(lblUser);
 
-		JLabel lblStatus = new JLabel("Status: ");
-		
-		lblStatus.setForeground(Color.BLACK);
-		lblStatus.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblStatus.setBounds(144, 530, 137, 41);
-		add(lblStatus);
+		JLabel lblNotification = new JLabel("Notifcations: None");
+		// use author count
+		// check all submissions for any notifications
+		// if notification exists
+		// lblNotification.setText("Notifications: " + # of papers accepted + " accepted!")
+		lblNotification.setForeground(Color.BLACK);
+		lblNotification.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblNotification.setBounds(144, 530, 209, 41);
+		add(lblNotification);
 
 		JLabel lblPublication = new JLabel("Publication Deadline:");
 		lblPublication.setFont(new Font("Arial", Font.PLAIN, 16));

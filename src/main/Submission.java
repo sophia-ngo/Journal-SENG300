@@ -13,10 +13,11 @@ public class Submission implements Serializable {
 	private Account authorAccount;
 	private Account reviewerAccount;
 	private String paperTitle;
+	// nominated reviewer for submission, updated by editor
 	private DefaultListModel<String> nomReviewers;
 	// user of submission
-	// nominated reviewer for submission, updated by editor
 	// feedback: major, critical, accept
+	private String notification;
 
 	/*
 	 * public static byte[] getBytes(File f) throws FileNotFoundException,
@@ -25,7 +26,7 @@ public class Submission implements Serializable {
 	 * read; while((read = fis.read(buffer)) != -1) { os.write(buffer, 0, read); }
 	 * fis.close(); os.close(); return os.toByteArray(); }
 	 */
-
+	
 	public String getPaperTitle() {
 		return paperTitle;
 	}
@@ -34,6 +35,10 @@ public class Submission implements Serializable {
 		return nomReviewers;
 	}
 
+	public String notification() {
+		return notification;
+	}
+	
 	public boolean submit(String path, Account acc, DefaultListModel list) {
 		try {
 			this.authorAccount = acc;
