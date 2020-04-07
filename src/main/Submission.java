@@ -40,7 +40,7 @@ public class Submission implements Serializable {
 			File f = new File(path);
 			this.bytesFromFile = Files.readAllBytes(f.toPath());
 			System.out.println(bytesFromFile.length);
-			String[] splitPath = path.split("\\\\"); // splits path name by "\"
+			String[] splitPath = path.split("/"); // splits path name by "\"
 			paperTitle = splitPath[splitPath.length - 1]; // takes last index of split
 			nomReviewers = list;
 			return true;

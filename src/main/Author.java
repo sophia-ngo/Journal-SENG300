@@ -35,6 +35,7 @@ public class Author extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField filenameTEXT;
 	String filename = null;
+	private int count = 1;
 
 	/**
 	 * Create the panel.
@@ -98,7 +99,8 @@ public class Author extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				db.dbLoad();
-				Submission s1 = db.dbGet("sub1");
+				int c_1 = count - 1;
+				Submission s1 = db.dbGet(acc.getUsername()+c_1);
 				s1.download();
 			}
 		});
@@ -280,7 +282,8 @@ public class Author extends JPanel {
 				db.dbLoad();
 				Submission s1 = new Submission();
 				s1.submit(filenameTEXT.getText(), acc, listModel);
-				db.dbAdd("sub1", s1);
+				db.dbAdd(acc.getUsername()+count, s1);
+				count++;
 				db.dbSave();
 				lblSuccess.setVisible(true);
 				lblPaper.setText("Paper submitted: " + s1.getPaperTitle());
