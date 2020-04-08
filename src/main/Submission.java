@@ -18,6 +18,7 @@ public class Submission implements Serializable {
 	private DefaultListModel<String> nomReviewers; // nominated reviewers for a submission
 	// user of submission
 	private String notification; // feedback: major, critical, accept
+	private String reviewerUser;
 
 	public void setReviewerUser(String user) {
 		this.reviewerUser = user;
