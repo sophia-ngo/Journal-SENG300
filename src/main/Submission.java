@@ -19,12 +19,19 @@ public class Submission implements Serializable {
 	// user of submission
 	private String notification; // feedback: major, critical, accept
 
+	public void setReviewerUser(String user) {
+		this.reviewerUser = user;
+	}
+	
 	public String getPaperTitle() {
 		return paperTitle;
 	}
 
-	public DefaultListModel<String> getNomReviewers() {
-		return nomReviewers;
+	public String[] getNomReviewers() {
+		Object[] x = this.nomReviewers.toArray();
+		String[] list = new String[x.length];
+		System.arraycopy(x, 0, list, 0, x.length);
+		return list;
 	}
 
 	public String notification() {
