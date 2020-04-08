@@ -9,8 +9,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 /**
+ * Checks for validity of account information.
+ * 
  * @author Group 2
- *
  */
 public class Authenticator {
 
@@ -50,6 +51,12 @@ public class Authenticator {
 		}
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param username
+	 * @return
+	 */
 	public boolean checkSameUser(String username) {
 		if (accounts.containsKey(username)) {
 			return true;
@@ -57,6 +64,15 @@ public class Authenticator {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param username
+	 * @param password
+	 * @param accType
+	 * @param samePass
+	 * @return
+	 */
 	public String register(String username, String password, AccountType accType, boolean samePass) {
 		boolean correctuser = Account.checkUsername(username);
 		boolean correctpass = Account.checkPassword(password);
@@ -79,6 +95,13 @@ public class Authenticator {
 		return "Unknown issue";
 	}
 
+	/**
+	 * 
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public Account login(String username, String password) {
 		if (accounts.containsKey(username)) {
 			if (accounts.get(username).getPassword().equals(password)) {

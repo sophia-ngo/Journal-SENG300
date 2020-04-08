@@ -26,35 +26,45 @@ import javax.swing.ImageIcon;
  * @author Group 2
  */
 public class Register extends JPanel {
+
 	private JTextField newuserTEXT;
 	private JTextField newPassTEXT;
 	private JTextField confirmPassTEXT;
 
 	/**
-	 * Create the panel.
+	 * Registration GUI allows for registering an account and shows errors on
+	 * screen.
+	 * 
+	 * @param frame
+	 * @param auth
+	 * @param db
 	 */
-
 	public Register(JFrame frame, Authenticator auth, Database db) {
-    
+
+		// Sets background and layout
 		setBackground(Color.WHITE);
 		setLayout(null);
 
+		// Title of registration screen
 		JLabel lblRegisterForAccount = new JLabel("Registration");
 		lblRegisterForAccount.setHorizontalAlignment(SwingConstants.CENTER);
 		lblRegisterForAccount.setFont(new Font("Arial", Font.BOLD, 20));
 		lblRegisterForAccount.setBounds(494, 127, 212, 26);
 		add(lblRegisterForAccount);
 
+		// Label for username
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblUsername.setBounds(348, 191, 77, 37);
 		add(lblUsername);
 
+		// Label for password
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblPassword.setBounds(348, 297, 77, 37);
 		add(lblPassword);
 
+		// Field for username
 		newuserTEXT = new JTextField();
 		newuserTEXT.setFont(new Font("Arial", Font.PLAIN, 16));
 		newuserTEXT.setColumns(10);
@@ -64,6 +74,7 @@ public class Register extends JPanel {
 		add(newuserTEXT);
 		newuserTEXT.setColumns(10);
 
+		// First field for password
 		newPassTEXT = new JPasswordField();
 		newPassTEXT.setFont(new Font("Arial", Font.PLAIN, 16));
 		newPassTEXT.setColumns(10);
@@ -73,6 +84,7 @@ public class Register extends JPanel {
 		add(newPassTEXT);
 		newPassTEXT.setColumns(10);
 
+		// Second field for password
 		confirmPassTEXT = new JPasswordField();
 		confirmPassTEXT.setDisabledTextColor(Color.LIGHT_GRAY);
 		confirmPassTEXT.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -83,6 +95,7 @@ public class Register extends JPanel {
 		add(confirmPassTEXT);
 		confirmPassTEXT.setColumns(10);
 
+		// Label that shows password must be minimum of 8 characters
 		JLabel lblInvalidPassword = new JLabel("Password must be minimum of 8 characters.");
 		lblInvalidPassword.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblInvalidPassword.setForeground(new Color(255, 51, 51));
@@ -90,6 +103,7 @@ public class Register extends JPanel {
 		add(lblInvalidPassword);
 		lblInvalidPassword.setVisible(false);
 
+		// Label that shows if passwords do not match
 		JLabel lblPasswordDoesntMatch = new JLabel("Passwords do not match.");
 		lblPasswordDoesntMatch.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblPasswordDoesntMatch.setForeground(new Color(255, 51, 51));
@@ -97,6 +111,7 @@ public class Register extends JPanel {
 		add(lblPasswordDoesntMatch);
 		lblPasswordDoesntMatch.setVisible(false);
 
+		// Label that shows if username is not between 4-12 characters
 		JLabel lblInvalidUsername = new JLabel("Username must be between 4-12 characters.");
 		lblInvalidUsername.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblInvalidUsername.setForeground(new Color(255, 51, 51));
@@ -104,6 +119,7 @@ public class Register extends JPanel {
 		add(lblInvalidUsername);
 		lblInvalidUsername.setVisible(false);
 
+		// Label that shows if username exists already
 		JLabel lblUsernameTaken = new JLabel("Username already exists.");
 		lblUsernameTaken.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblUsernameTaken.setForeground(new Color(255, 51, 51));
@@ -111,6 +127,7 @@ public class Register extends JPanel {
 		add(lblUsernameTaken);
 		lblUsernameTaken.setVisible(false);
 
+		// Dropdown menu for account type
 		String[] Choices = { "Author", "Reviewer", "Editor" };
 		JComboBox aType = new JComboBox(Choices);
 		aType.setBackground(Color.WHITE);
@@ -119,6 +136,7 @@ public class Register extends JPanel {
 		aType.setBounds(722, 507, 130, 27);
 		add(aType);
 
+		// Button to confirm registration
 		JButton btnRegister = new JButton("Register");
 		btnRegister.setBackground(new Color(245, 245, 245));
 		btnRegister.setFont(new Font("Arial", Font.BOLD, 16));
@@ -127,41 +145,48 @@ public class Register extends JPanel {
 		btnRegister.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				// Sets all error messages false
 				lblPasswordDoesntMatch.setVisible(false);
 				lblInvalidUsername.setVisible(false);
 				lblInvalidPassword.setVisible(false);
 
+				// Get text from the text fields
 				String user = newuserTEXT.getText();
 				String pass = newPassTEXT.getText();
 				AccountType accType = new AccountType();
 				accType.setAccType(aType.getSelectedIndex());
 
-				Boolean check = true;
+				Boolean check = true; // overall check for errors
 				Boolean same = true; // same password check
 				String confirm = confirmPassTEXT.getText();
 
+				// Checks if passwords are the same
 				if (!pass.equals(confirm)) {
 					lblPasswordDoesntMatch.setVisible(true);
 					check = false;
 					same = false;
 				}
 
+				// Checks if username is valid
 				if (!Account.checkUsername(user)) {
 					lblInvalidUsername.setVisible(true);
 					check = false;
 				}
 
+				// Checks if account already exists
 				if (auth.checkSameUser(user)) {
 					lblUsernameTaken.setVisible(true);
 					check = false;
 				}
 
+				// Checks if passworld is valid
 				if (!Account.checkPassword(pass)) {
 					lblInvalidPassword.setVisible(true);
 					check = false;
 				}
 
-				auth.register(user, pass, accType, same);
+				auth.register(user, pass, accType, same); // registers account
+				// Sends back to login screen if all information is correct
 				if (check) {
 					auth.setSuccess(true);
 					Login panel = new Login(frame, auth, db);
@@ -173,6 +198,7 @@ public class Register extends JPanel {
 		btnRegister.setBounds(348, 610, 504, 29);
 		add(btnRegister);
 
+		// Button to go back to login screen
 		JLabel btnBack = new JLabel("\u2190");
 		btnBack.setForeground(Color.WHITE);
 		btnBack.setHorizontalAlignment(SwingConstants.CENTER);
@@ -191,16 +217,19 @@ public class Register extends JPanel {
 		btnBack.setBounds(10, 11, 47, 26);
 		add(btnBack);
 
+		// Label for confirm password
 		JLabel lblConfirmPassword = new JLabel("Confirm Password");
 		lblConfirmPassword.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblConfirmPassword.setBounds(348, 396, 141, 37);
 		add(lblConfirmPassword);
 
+		// Label for account type
 		JLabel lblAccountType = new JLabel("Account Type");
 		lblAccountType.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblAccountType.setBounds(348, 502, 105, 37);
 		add(lblAccountType);
-		
+
+		// Eye picture
 		JLabel showPass = new JLabel("");
 		showPass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		showPass.setIcon(new ImageIcon(Register.class.getResource("/eye.png")));
@@ -208,7 +237,8 @@ public class Register extends JPanel {
 		showPass.setFont(new Font("Arial", Font.BOLD, 22));
 		showPass.setBounds(858, 340, 39, 22);
 		add(showPass);
-		
+
+		// Crossed eye picture
 		JLabel hidePass = new JLabel("");
 		hidePass.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		hidePass.setIcon(new ImageIcon(Register.class.getResource("/eyecross.png")));
@@ -216,19 +246,22 @@ public class Register extends JPanel {
 		hidePass.setFont(new Font("Arial", Font.BOLD, 22));
 		hidePass.setBounds(858, 340, 39, 22);
 		add(hidePass);
-		
+
+		// Decorative yellow block
 		JLabel lblYellowBlock = new JLabel("");
 		lblYellowBlock.setOpaque(true);
 		lblYellowBlock.setBackground(new Color(255, 217, 17));
 		lblYellowBlock.setBounds(0, 748, 1200, 52);
 		add(lblYellowBlock);
-		
+
+		// Decorative red block
 		JLabel lblRedBlock = new JLabel("");
 		lblRedBlock.setOpaque(true);
 		lblRedBlock.setBackground(new Color(231, 43, 46));
 		lblRedBlock.setBounds(0, 0, 1200, 52);
 		add(lblRedBlock);
-		
+
+		// Shows password when eye is clicked
 		hidePass.setVisible(false);
 		showPass.addMouseListener(new MouseAdapter() {
 			@Override
@@ -240,6 +273,7 @@ public class Register extends JPanel {
 			}
 		});
 
+		// Hides password when crossed eye is clicked
 		hidePass.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
