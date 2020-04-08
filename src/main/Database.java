@@ -8,6 +8,7 @@ public class Database implements Serializable{
 
 	private HashMap<String, Submission> files = new HashMap<String, Submission>();
 	private String fileName = "data.bin";
+	private static final long serialVersionUID = -1387287068956938420L;
 	
 	public void dbAdd(String key, Submission s) {
 		files.put(key, s);
@@ -52,6 +53,25 @@ public class Database implements Serializable{
 			subsf[j] = subs.get(j);
 		}
 		return subsf;
+	}
+	
+	public String[] getKeys() {
+		ArrayList<String> subs = new ArrayList<String>();
+		for (String name: files.keySet()){
+            String key = name.toString();
+            subs.add(key);
+		} 
+		
+		String[] subsf = new String[subs.size()];
+		for(int j = 0; j < subs.size(); j++) {
+			subsf[j] = subs.get(j);
+		}
+		return subsf;
+		
+	}
+	
+	public Submission getSubmission(String key) {
+		return files.get(key);
 	}
 	
 }

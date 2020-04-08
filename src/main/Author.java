@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
@@ -28,7 +29,7 @@ import javax.swing.DefaultListModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Author extends JPanel {
+public class Author extends JPanel implements Serializable{
 	/**
 	 * 
 	 */
@@ -62,7 +63,7 @@ public class Author extends JPanel {
 		// Sets paper name if there is one submitted
 		JLabel lblPaper = new JLabel("Paper submitted: ");
 		try {
-			lblPaper.setText("Paper submitted: " + db.dbGet("sub1").getPaperTitle());
+			lblPaper.setText("Paper submitted: " + db.dbGet(acc.getUsername()).getPaperTitle());
 		} catch(Exception e) {
 			lblPaper.setText("Paper submitted: None");
 		}
@@ -99,8 +100,8 @@ public class Author extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				db.dbLoad();
-				int c_1 = count - 1;
-				Submission s1 = db.dbGet(acc.getUsername()+c_1);
+				//int c_1 = count - 1;
+				Submission s1 = db.dbGet(acc.getUsername());
 				s1.download();
 			}
 		});
@@ -210,6 +211,7 @@ public class Author extends JPanel {
 				String selected = (String) reviewerComboBox.getSelectedItem(); // gets current selected item
 				if (!listModel.contains(selected) && listModel.getSize() < 3) {
 					listModel.addElement(selected);
+					System.out.println(listModel);
 				}
 
 			}
@@ -221,7 +223,7 @@ public class Author extends JPanel {
 		add(btnAdd);
 		
 		JList reviewerList = new JList(listModel);
-		reviewerList.setVisibleRowCount(3);
+		reviewerList.setVisibleRowCount(4);
 		reviewerList.setBackground(new Color(245, 245, 245));
 		reviewerList.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		reviewerList.setBounds(871, 493, 131, 67);
@@ -234,6 +236,7 @@ public class Author extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String selected = (String) reviewerList.getSelectedValue();
 				listModel.removeElement(selected);
+				System.out.println(listModel);
 			}
 		});
 		btnRemove.setFont(new Font("Arial", Font.BOLD, 16));
@@ -282,9 +285,10 @@ public class Author extends JPanel {
 				db.dbLoad();
 				Submission s1 = new Submission();
 				s1.submit(filenameTEXT.getText(), acc, listModel);
-				db.dbAdd(acc.getUsername()+count, s1);
-				count++;
+				db.dbAdd(acc.getUsername(), s1);
+				//count++;
 				db.dbSave();
+				db.dbLoad();
 				lblSuccess.setVisible(true);
 				lblPaper.setText("Paper submitted: " + s1.getPaperTitle());
 			}

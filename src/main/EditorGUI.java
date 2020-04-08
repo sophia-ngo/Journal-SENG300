@@ -19,11 +19,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class EditorGUI extends JPanel {
+public class EditorGUI extends JPanel implements Serializable{
 
 	@SuppressWarnings("resource")
 	public EditorGUI(JFrame frame, Account acc, Authenticator auth, Database db) {
@@ -77,24 +78,14 @@ public class EditorGUI extends JPanel {
 		lblSelectReviewer.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(lblSelectReviewer);
 
-		JComboBox<String> Reviewerlist = new JComboBox<String>();
-		// Checks if submission exists
-		try {
-			int sizeList = db.dbGet("sub1").getNomReviewers().getSize();
-			DefaultListModel<String> list = db.dbGet("sub1").getNomReviewers();
-			// Adds reviewers into combobox
-			for (int i = sizeList; i > 0; i--) {
-				Reviewerlist.addItem(list.elementAt(i));
-			}
-		} catch(Exception e) {
-		}
-		Reviewerlist.setFont(new Font("Arial", Font.PLAIN, 16));
-		Reviewerlist.setBackground(Color.WHITE);
-		Reviewerlist.setBorder(null);
-		Reviewerlist.setBounds(660, 442, 219, 26);
-		Reviewerlist.setEditable(true);
-		Reviewerlist.setMaximumRowCount(100);
-		add(Reviewerlist);
+		String[] Authors = db.getKeys();
+		JComboBox comboBoxSelectAuthor = new JComboBox(Authors);
+		comboBoxSelectAuthor.setBounds(660, 307, 154, 27);
+		add(comboBoxSelectAuthor);
+		
+		JComboBox comboBoxR = new JComboBox();
+		comboBoxR.setBounds(660, 443, 218, 27);
+		add(comboBoxR);
 
 		JButton btnAssign = new JButton("Assign");
 		btnAssign.setFont(new Font("Arial", Font.BOLD, 16));
@@ -105,8 +96,10 @@ public class EditorGUI extends JPanel {
 		btnAssign.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Reviewer Assigned");
-
+				String x = comboBoxSelectAuthor.getSelectedItem().toString();
+				String name = comboBoxR.getSelectedItem().toString();
+				db.getSubmission(x).setReviewerUser(name);
+				System.out.println("Reviewer: " + name + " Assigned");
 			}
 		});
 		btnAssign.addActionListener(new ActionListener() {
@@ -115,23 +108,11 @@ public class EditorGUI extends JPanel {
 			}
 		});
 
-		JLabel lblSelectPaper = new JLabel("Select Paper:");
-		lblSelectPaper.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblSelectPaper.setBounds(503, 371, 122, 26);
-		add(lblSelectPaper);
-
 		try {
 			db.dbLoad();
 		}catch(Exception e) {
 			
 		}
-		String[] Submissions = db.getSubmissions();
-		JComboBox comboBoxSelectPaper = new JComboBox(Submissions);
-		comboBoxSelectPaper.setBackground(Color.WHITE);
-		comboBoxSelectPaper.setFont(new Font("Arial", Font.PLAIN, 16));
-		comboBoxSelectPaper.setBorder(null);
-		comboBoxSelectPaper.setBounds(660, 371, 219, 26);
-		add(comboBoxSelectPaper);
 		add(btnAssign);
 
 		JLabel lblAccountType = new JLabel("Editor Account");
@@ -203,7 +184,60 @@ public class EditorGUI extends JPanel {
 		lblYellowVert.setBackground(new Color(255, 217, 17));
 		lblYellowVert.setBounds(434, 222, 12, 441);
 		add(lblYellowVert);
+		
+		JLabel lblSelectAuthor = new JLabel("Author:");
+		lblSelectAuthor.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblSelectAuthor.setBounds(503, 310, 122, 16);
+		add(lblSelectAuthor);
+		
+		JLabel lblSelectPaper = new JLabel("Paper Selected:");
+		lblSelectPaper.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblSelectPaper.setBounds(503, 371, 375, 26);
+		add(lblSelectPaper);
+		
+		
+		
+		/*
+		JComboBox<String> Reviewerlist = new JComboBox<String>();
+		// Checks if submission exists
+		try {
+			int sizeList = db.dbGet("sub1").getNomReviewers().getSize();
+			DefaultListModel<String> list = db.dbGet("sub1").getNomReviewers();
+			// Adds reviewers into combobox
+			for (int i = sizeList; i > 0; i--) {
+				Reviewerlist.addItem(list.elementAt(i));
+			}
+		} catch(Exception e) {
+		}
+		Reviewerlist.setFont(new Font("Arial", Font.PLAIN, 16));
+		Reviewerlist.setBackground(Color.WHITE);
+		Reviewerlist.setBorder(null);
+		Reviewerlist.setBounds(660, 442, 219, 26);
+		Reviewerlist.setEditable(true);
+		Reviewerlist.setMaximumRowCount(100);
+		add(Reviewerlist);
+		*/
+		
+		
+		
+		JButton btnSelect = new JButton("Select");
+		btnSelect.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String x = comboBoxSelectAuthor.getSelectedItem().toString();
+				String paper = db.getSubmission(x).getPaperTitle();
+				lblSelectPaper.setText("Paper Selected: " + paper);
+				String[] list = db.getSubmission(x).getNomReviewers();
+				for(int i = 0; i < list.length; i++) {
+					comboBoxR.addItem(list[i]);
+				}
+				frame.revalidate();
+			}
+		});
+		btnSelect.setBounds(806, 306, 73, 29);
+		add(btnSelect);
+	
+		
 
 	}
-
 }
