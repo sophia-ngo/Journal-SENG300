@@ -101,7 +101,7 @@ public class Login extends JPanel {
 						frame.revalidate();
 						// Sets to reviewer panel
 					} else if (type.equals("Reviewer")) {
-						MainScreen panel = new MainScreen(frame, acc, auth, db);
+						Review panel = new Review(frame, acc, auth, db);
 						frame.setContentPane(panel);
 						frame.revalidate();
 						// Sets to editor panel
