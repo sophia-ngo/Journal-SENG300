@@ -72,11 +72,13 @@ public class EditorGUI extends JPanel {
 		 */
 		setLayout(null);
 
+		// Label for select reviewer
 		JLabel lblSelectReviewer = new JLabel("Select Reviewer:");
 		lblSelectReviewer.setBounds(503, 441, 154, 26);
 		lblSelectReviewer.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(lblSelectReviewer);
 
+		// List of nominated reviewers
 		JComboBox<String> Reviewerlist = new JComboBox<String>();
 		// Checks if submission exists
 		try {
@@ -96,6 +98,7 @@ public class EditorGUI extends JPanel {
 		Reviewerlist.setMaximumRowCount(100);
 		add(Reviewerlist);
 
+		// Button for assigning everything
 		JButton btnAssign = new JButton("Assign");
 		btnAssign.setFont(new Font("Arial", Font.BOLD, 16));
 		btnAssign.setBorder(new LineBorder(Color.LIGHT_GRAY));

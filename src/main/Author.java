@@ -28,29 +28,41 @@ import javax.swing.DefaultListModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Author can submit multiple papers, nominate reviewers, and see notifications.
+ * 
+ * @author Group 2
+ */
 public class Author extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JTextField filenameTEXT;
 	String filename = null;
 	private int count = 1;
 
 	/**
-	 * Create the panel.
+	 * Author GUI that allows for submission of paper.
+	 * 
+	 * @param frame
+	 * @param acc
+	 * @param auth
+	 * @param db
 	 */
 	public Author(JFrame frame, Account acc, Authenticator auth, Database db) {
+
+		// Sets background and layout
 		setBackground(Color.WHITE);
 		setLayout(null);
 
+		// Text field that shows file path
 		filenameTEXT = new JTextField();
 		filenameTEXT.setBackground(new Color(245, 245, 245));
 		filenameTEXT.setFont(new Font("Arial", Font.PLAIN, 12));
 		filenameTEXT.setBounds(634, 381, 267, 26);
 		add(filenameTEXT);
 		filenameTEXT.setColumns(10);
-		
+
+		// Label for success of submission
 		JLabel lblSuccess = new JLabel("Successfully submitted!");
 		lblSuccess.setForeground(new Color(51, 204, 0));
 		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
@@ -58,18 +70,19 @@ public class Author extends JPanel {
 		lblSuccess.setBounds(646, 598, 182, 26);
 		add(lblSuccess);
 		lblSuccess.setVisible(false);
-		
+
 		// Sets paper name if there is one submitted
 		JLabel lblPaper = new JLabel("Paper submitted: ");
 		try {
 			lblPaper.setText("Paper submitted: " + db.dbGet("sub1").getPaperTitle());
-		} catch(Exception e) {
+		} catch (Exception e) {
 			lblPaper.setText("Paper submitted: None");
 		}
 		lblPaper.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblPaper.setBounds(468, 222, 534, 26);
 		add(lblPaper);
 
+		// Button for choosing a file
 		JButton btnChooseFile = new JButton("...");
 		btnChooseFile.setBackground(new Color(245, 245, 245));
 		btnChooseFile.setFont(new Font("Arial", Font.BOLD, 16));
@@ -100,19 +113,21 @@ public class Author extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				db.dbLoad();
 				int c_1 = count - 1;
-				Submission s1 = db.dbGet(acc.getUsername()+c_1);
+				Submission s1 = db.dbGet(acc.getUsername() + c_1);
 				s1.download();
 			}
 		});
 		btnDownload.setBounds(468, 259, 161, 28);
 		add(btnDownload);
 
+		// Label for account type
 		JLabel lblAccountType = new JLabel("Type: Author");
 		lblAccountType.setForeground(Color.BLACK);
 		lblAccountType.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblAccountType.setBounds(144, 496, 117, 41);
 		add(lblAccountType);
 
+		// Label for logout, acts as a button
 		JLabel lblLogout = new JLabel("<HTML><U>Logout</U></HTML>");
 		lblLogout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		lblLogout.addMouseListener(new MouseAdapter() {
@@ -128,6 +143,7 @@ public class Author extends JPanel {
 		lblLogout.setBounds(128, 635, 57, 35);
 		add(lblLogout);
 
+		// Label for title
 		JLabel lblUJournal = new JLabel("UJournal");
 		lblUJournal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUJournal.setForeground(Color.WHITE);
@@ -135,49 +151,64 @@ public class Author extends JPanel {
 		lblUJournal.setBounds(501, 0, 199, 122);
 		add(lblUJournal);
 
+		// Chooses a date
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBackground(new Color(245, 245, 245));
 		dateChooser.setFont(new Font("Arial", Font.PLAIN, 16));
 		dateChooser.setBounds(633, 433, 161, 26);
 		add(dateChooser);
 
+		// Logo icon
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo.setIcon(new ImageIcon(Author.class.getResource("/uofclogosmall.png")));
 		lblLogo.setBounds(128, 222, 236, 199);
 		add(lblLogo);
 
+		// Label for greeting user
 		JLabel lblUser = new JLabel("Hello " + acc.getUsername() + "!");
 		lblUser.setForeground(Color.WHITE);
 		lblUser.setFont(new Font("Arial", Font.BOLD, 20));
 		lblUser.setBounds(144, 433, 209, 41);
 		add(lblUser);
 
+		// Label for notifications
 		JLabel lblNotification = new JLabel("Notifcations: None");
-		// use author count
+		String paper = acc.getUsername() + "1";
+		int numNotifications = 0; // number of notifications
 		// check all submissions for any notifications
+		while (paper != null && numNotifications < count) {
+			numNotifications++;
+			paper = acc.getUsername() + numNotifications;
+		}
 		// if notification exists
-		// lblNotification.setText("Notifications: " + # of papers accepted + " accepted!")
+		if (count > 0) {
+			lblNotification.setText("Notifications: " + numNotifications + "accepted!");
+		}
 		lblNotification.setForeground(Color.BLACK);
 		lblNotification.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblNotification.setBounds(144, 530, 209, 41);
 		add(lblNotification);
 
+		// Label for publication deadline
 		JLabel lblPublication = new JLabel("Publication Deadline:");
 		lblPublication.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblPublication.setBounds(468, 433, 155, 26);
 		add(lblPublication);
 
+		// Label for submit paper title
 		JLabel lblSubmitAPaper = new JLabel("Submit a Paper");
 		lblSubmitAPaper.setFont(new Font("Arial", Font.BOLD, 20));
 		lblSubmitAPaper.setBounds(468, 322, 534, 26);
 		add(lblSubmitAPaper);
 
+		// Label for nominating reviewers
 		JLabel lblNominate = new JLabel("Nominate Reviewers:");
 		lblNominate.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblNominate.setBounds(468, 493, 155, 26);
 		add(lblNominate);
 
+		// Reviewer dropdown menu
 		JComboBox<String> reviewerComboBox = new JComboBox<String>();
 		// read accounts.txt
 		try {
@@ -205,6 +236,7 @@ public class Author extends JPanel {
 		reviewerComboBox.setBounds(634, 493, 146, 26);
 		add(reviewerComboBox);
 
+		// Button to add/nominate reviewers
 		JButton btnAdd = new JButton(">>");
 		DefaultListModel<String> listModel = new DefaultListModel<String>(); // list model to add to Jlist
 		btnAdd.addActionListener(new ActionListener() {
@@ -222,7 +254,8 @@ public class Author extends JPanel {
 		btnAdd.setBackground(new Color(245, 245, 245));
 		btnAdd.setBounds(790, 492, 69, 29);
 		add(btnAdd);
-		
+
+		// List of reviewers added in box
 		JList reviewerList = new JList(listModel);
 		reviewerList.setVisibleRowCount(3);
 		reviewerList.setBackground(new Color(245, 245, 245));
@@ -231,6 +264,7 @@ public class Author extends JPanel {
 		reviewerList.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(reviewerList);
 
+		// Button to remove a nominated reviewer
 		JButton btnRemove = new JButton("<<");
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
@@ -244,36 +278,42 @@ public class Author extends JPanel {
 		btnRemove.setBackground(new Color(245, 245, 245));
 		btnRemove.setBounds(790, 530, 69, 29);
 		add(btnRemove);
-		
+
+		// Decorative yellow block
 		JLabel lblYellowBlock = new JLabel("");
 		lblYellowBlock.setOpaque(true);
 		lblYellowBlock.setBackground(new Color(255, 217, 17));
 		lblYellowBlock.setBounds(128, 485, 236, 94);
 		add(lblYellowBlock);
-		
+
+		// Decorative red block
 		JLabel lblRedBlock = new JLabel("");
 		lblRedBlock.setOpaque(true);
 		lblRedBlock.setBackground(new Color(231, 43, 46));
 		lblRedBlock.setBounds(128, 421, 236, 67);
 		add(lblRedBlock);
-		
+
+		// Decorative yellow long block
 		JLabel lblYellowVert = new JLabel("");
 		lblYellowVert.setOpaque(true);
 		lblYellowVert.setBackground((new Color(255, 217, 17)));
 		lblYellowVert.setBounds(434, 222, 12, 441);
 		add(lblYellowVert);
-		
-		JLabel lblFile = new JLabel("Upload:");
-		lblFile.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblFile.setBounds(468, 381, 155, 26);
-		add(lblFile);
-		
+
+		// Label for upload
+		JLabel lblUpload = new JLabel("Upload:");
+		lblUpload.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblUpload.setBounds(468, 381, 155, 26);
+		add(lblUpload);
+
+		// Decorative red header block
 		JLabel lblRedHorz = new JLabel("");
 		lblRedHorz.setOpaque(true);
 		lblRedHorz.setBackground(new Color(231, 43, 46));
 		lblRedHorz.setBounds(0, 0, 1200, 122);
 		add(lblRedHorz);
-		
+
+		// Button for submitting paper + nominated reviewer
 		JButton btnSubmit = new JButton("Submit");
 		btnSubmit.setBackground(new Color(245, 245, 245));
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 16));
@@ -285,7 +325,7 @@ public class Author extends JPanel {
 				db.dbLoad();
 				Submission s1 = new Submission();
 				s1.submit(filenameTEXT.getText(), acc, listModel);
-				db.dbAdd(acc.getUsername()+count, s1);
+				db.dbAdd(acc.getUsername() + count, s1);
 				count++;
 				db.dbSave();
 				lblSuccess.setVisible(true);
