@@ -2,6 +2,11 @@ package main;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * 
+ * @author Group 2
+ */
 public class AccountType implements Serializable{
   
 	public String[] accTypes = { "Author", "Reviewer", "Editor" };

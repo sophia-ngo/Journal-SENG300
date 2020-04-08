@@ -13,25 +13,34 @@ import java.awt.event.MouseEvent;
 import java.awt.Cursor;
 
 /**
- * Main screen of the program after logging in.
+ * Redirects to corresponding main screen for each account type. delete this later?
  * 
  * @author Group 2
  */
 public class MainScreen extends JPanel {
 
 	/**
-	 * Create the panel.
+	 * Main screen dependent on account type.
+	 * 
+	 * @param frame
+	 * @param acc
+	 * @param auth
+	 * @param db
 	 */
 	public MainScreen(JFrame frame, Account acc, Authenticator auth, Database db) {
+		
+		// Sets background and layout
 		setBackground(Color.WHITE);
 		setLayout(null);
 
+		// Label for account type
 		JLabel lblAccountType = new JLabel(acc.getAccountType().getAccType() + " Account");
 		lblAccountType.setForeground(Color.WHITE);
 		lblAccountType.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblAccountType.setBounds(10, 11, 149, 16);
 		add(lblAccountType);
 
+		// Label for title
 		JLabel lblUJournal = new JLabel("UJournal");
 		lblUJournal.setForeground(Color.WHITE);
 		lblUJournal.setHorizontalAlignment(SwingConstants.CENTER);
@@ -39,6 +48,7 @@ public class MainScreen extends JPanel {
 		lblUJournal.setBounds(500, 48, 199, 42);
 		add(lblUJournal);
 
+		// 
 		JLabel lblName = new JLabel("Hello, " + acc.getUsername() + "!");
 		lblName.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblName.setHorizontalAlignment(SwingConstants.CENTER);
@@ -60,6 +70,7 @@ public class MainScreen extends JPanel {
 		lblLogout.setBounds(1119, 11, 57, 17);
 		add(lblLogout);
 
+		// Decorative red block
 		JLabel lblRedBlock = new JLabel("");
 		lblRedBlock.setOpaque(true);
 		lblRedBlock.setBackground(new Color(231, 43, 46));

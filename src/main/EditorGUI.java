@@ -73,6 +73,7 @@ public class EditorGUI extends JPanel implements Serializable{
 		 */
 		setLayout(null);
 
+		// Label for select reviewer
 		JLabel lblSelectReviewer = new JLabel("Select Reviewer:");
 		lblSelectReviewer.setBounds(503, 441, 154, 26);
 		lblSelectReviewer.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -87,6 +88,29 @@ public class EditorGUI extends JPanel implements Serializable{
 		comboBoxR.setBounds(660, 443, 218, 27);
 		add(comboBoxR);
 
+  /*
+		// List of nominated reviewers
+		JComboBox<String> Reviewerlist = new JComboBox<String>();
+		// Checks if submission exists
+		try {
+			int sizeList = db.dbGet("sub1").getNomReviewers().getSize();
+			DefaultListModel<String> list = db.dbGet("sub1").getNomReviewers();
+			// Adds reviewers into combobox
+			for (int i = sizeList; i > 0; i--) {
+				Reviewerlist.addItem(list.elementAt(i));
+			}
+		} catch(Exception e) {
+		}
+		Reviewerlist.setFont(new Font("Arial", Font.PLAIN, 16));
+		Reviewerlist.setBackground(Color.WHITE);
+		Reviewerlist.setBorder(null);
+		Reviewerlist.setBounds(660, 442, 219, 26);
+		Reviewerlist.setEditable(true);
+		Reviewerlist.setMaximumRowCount(100);
+		add(Reviewerlist);
+    */
+
+		// Button for assigning everything
 		JButton btnAssign = new JButton("Assign");
 		btnAssign.setFont(new Font("Arial", Font.BOLD, 16));
 		btnAssign.setBorder(new LineBorder(Color.LIGHT_GRAY));
