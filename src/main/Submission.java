@@ -23,11 +23,12 @@ public class Submission implements Serializable {
 	public void setReviewerUser(String user) {
 		this.reviewerUser = user;
 	}
-	
+	//This will get the papertitle and return it
 	public String getPaperTitle() {
 		return paperTitle;
 	}
 
+	//This will get the name of the nominated reviewer
 	public String[] getNomReviewers() {
 		Object[] x = this.nomReviewers.toArray();
 		String[] list = new String[x.length];
