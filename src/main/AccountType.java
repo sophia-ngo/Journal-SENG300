@@ -8,7 +8,8 @@ import java.io.Serializable;
  * @author Group 2
  */
 public class AccountType implements Serializable{
-  
+	
+  	//This sets up the diffrent types of accounts that we will be using and we will use the type String
 	public String[] accTypes = { "Author", "Reviewer", "Editor" };
 	private String accType;
 	private int accNum;
