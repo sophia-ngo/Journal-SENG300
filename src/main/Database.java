@@ -54,7 +54,11 @@ public class Database implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
 
+	/*
+	*This gets the submission that was submitted
+	*/
 	public String[] getSubmissions() {
 		ArrayList<String> subs = new ArrayList<String>();
 		for (String name : files.keySet()) {
