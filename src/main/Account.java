@@ -13,6 +13,7 @@ public class Account implements Serializable {
 	private String password;
 	private AccountType accType;
 
+	//This checks for the username to be atleast 4 digits long and at mostb 12 digits
 	public static boolean checkUsername(String username) {
 		if (username.length() >= 4 && username.length() <= 12) {
 			return true;
@@ -20,6 +21,7 @@ public class Account implements Serializable {
 		return false;
 	}
 
+	//This checks the password to be atleast 8 digits
 	public static boolean checkPassword(String pass) {
 		if (pass.length() >= 8) {
 			return true;
@@ -27,6 +29,7 @@ public class Account implements Serializable {
 		return false;
 	}
 
+	//This sets up the username and the password and account types that were entered 
 	public Account(String user, String pass, AccountType accType) {
 		this.username = user;
 		this.password = pass;
