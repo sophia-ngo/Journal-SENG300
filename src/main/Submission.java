@@ -18,15 +18,17 @@ public class Submission implements Serializable {
 	private DefaultListModel<String> nomReviewers; // nominated reviewers for a submission
 	// user of submission
 	private String notification; // feedback: major, critical, accept
+	private String reviewerUser;
 
 	public void setReviewerUser(String user) {
 		this.reviewerUser = user;
 	}
-	
+	//This will get the papertitle and return it
 	public String getPaperTitle() {
 		return paperTitle;
 	}
 
+	//This will get the name of the nominated reviewer
 	public String[] getNomReviewers() {
 		Object[] x = this.nomReviewers.toArray();
 		String[] list = new String[x.length];

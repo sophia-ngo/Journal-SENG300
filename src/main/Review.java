@@ -39,11 +39,13 @@ public class Review extends JPanel {
 	private JTextArea textarea;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+
 	private int p = 0;
 	private int b = 0;
 	private String change;
 	private String decision;
 	private String Response;
+
 
 	/**
 	 * Create the frame.
@@ -56,6 +58,7 @@ public class Review extends JPanel {
 		txt.setText("Write your comment here:");
 		System.out.println(txt);
 		txt.setBounds(141, 163, 245, 164);
+
 		String message = txt.getText();
 		setLayout(null);
 		add(txt);
@@ -81,6 +84,7 @@ public class Review extends JPanel {
 		}
 		JLabel lblNewLabel = new JLabel("Comment");
 		lblNewLabel.setBounds(214, 118, 97, 29);
+
 		add(lblNewLabel);
 	 
 		JButton btnNewButton = new JButton("Submit Comment");
@@ -88,7 +92,9 @@ public class Review extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+
 		btnNewButton.setBounds(241, 363, 123, 23);
+
 		add(btnNewButton);
 		
 		//button for download
@@ -108,7 +114,9 @@ public class Review extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+
 		btnNewButton_1.setBounds(492, 475, 136, 29);
+
 		add(btnNewButton_1);
 		
 		//Informs of minor changes
@@ -124,7 +132,9 @@ public class Review extends JPanel {
 			
 		});
 		buttonGroup.add(rdbtnNewRadioButton);
+
 		rdbtnNewRadioButton.setBounds(404, 164, 147, 23);
+
 		add(rdbtnNewRadioButton);
 		
 		//Informs of major changes
@@ -140,7 +150,9 @@ public class Review extends JPanel {
 			
 		});
 		buttonGroup.add(rdbtnNewRadioButton_1);
+
 		rdbtnNewRadioButton_1.setBounds(404, 192, 147, 23);
+
 		add(rdbtnNewRadioButton_1);
 		
 		//Informs of the paper being accepted
@@ -156,10 +168,10 @@ public class Review extends JPanel {
 		});
 		
 		buttonGroup_1.add(rdbtnNewRadioButton_2);
-		
+
 		rdbtnNewRadioButton_2.setBounds(603, 207, 106, 23);
 		add(rdbtnNewRadioButton_2);
-		
+
 		//Informs of the paper being rejected
 		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("Reject");
 		rdbtnNewRadioButton_3.addMouseListener(new MouseAdapter() {
@@ -174,6 +186,7 @@ public class Review extends JPanel {
 		});
 
 		buttonGroup_1.add(rdbtnNewRadioButton_3);
+
 		rdbtnNewRadioButton_3.setBounds(603, 162, 106, 23);
 		add(rdbtnNewRadioButton_3);
 		
@@ -207,5 +220,6 @@ public class Review extends JPanel {
 		
 		btnNewButton_2.setBounds(508, 330, 160, 29);
 		add(btnNewButton_2);
+
 	}
 }
