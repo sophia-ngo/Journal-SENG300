@@ -43,6 +43,7 @@ public class Review extends JPanel {
 	/**
 	 * Create the frame.
 	 */
+	//connects the class to the authenticator and the database
 	public Review(JFrame frame, Account acc, Authenticator auth, Database db) {
 		
 		JTextArea txt = new JTextArea();
@@ -85,6 +86,7 @@ public class Review extends JPanel {
 		btnNewButton.setBounds(404, 317, 97, 23);
 		add(btnNewButton);
 		
+		//button for download
 		JButton btnNewButton_1 = new JButton("Download");
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
@@ -104,21 +106,25 @@ public class Review extends JPanel {
 		btnNewButton_1.setBounds(404, 283, 97, 23);
 		add(btnNewButton_1);
 		
+		//Informs of minor changes
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Minor Changes");
 		buttonGroup.add(rdbtnNewRadioButton);
 		rdbtnNewRadioButton.setBounds(404, 164, 97, 23);
 		add(rdbtnNewRadioButton);
 		
+		//Informs of major changes
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Major Changes");
 		buttonGroup.add(rdbtnNewRadioButton_1);
 		rdbtnNewRadioButton_1.setBounds(404, 192, 97, 23);
 		add(rdbtnNewRadioButton_1);
 		
+		//Informs of the paper being accepted
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Accept");
 		buttonGroup_1.add(rdbtnNewRadioButton_2);
 		rdbtnNewRadioButton_2.setBounds(404, 220, 59, 23);
 		add(rdbtnNewRadioButton_2);
 		
+		//Informs of the paper being rejected
 		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("Reject");
 		buttonGroup_1.add(rdbtnNewRadioButton_3);
 		rdbtnNewRadioButton_3.setBounds(404, 246, 57, 23);
