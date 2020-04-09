@@ -40,6 +40,13 @@ public class Review extends JPanel {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 
+	private int p = 0;
+	private int b = 0;
+	private String change;
+	private String decision;
+	private String Response;
+
+
 	/**
 	 * Create the frame.
 	 */
@@ -50,7 +57,8 @@ public class Review extends JPanel {
 		
 		txt.setText("Write your comment here:");
 		System.out.println(txt);
-		txt.setBounds(175, 163, 196, 22);
+		txt.setBounds(141, 163, 245, 164);
+
 		String message = txt.getText();
 		setLayout(null);
 		add(txt);
@@ -75,15 +83,18 @@ public class Review extends JPanel {
 			e.printStackTrace();
 		}
 		JLabel lblNewLabel = new JLabel("Comment");
-		lblNewLabel.setBounds(176, 140, 45, 14);
+		lblNewLabel.setBounds(214, 118, 97, 29);
+
 		add(lblNewLabel);
 	 
-		JButton btnNewButton = new JButton("Resubmit");
+		JButton btnNewButton = new JButton("Submit Comment");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(404, 317, 97, 23);
+
+		btnNewButton.setBounds(241, 363, 123, 23);
+
 		add(btnNewButton);
 		
 		//button for download
@@ -103,32 +114,112 @@ public class Review extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton_1.setBounds(404, 283, 97, 23);
+
+		btnNewButton_1.setBounds(492, 475, 136, 29);
+
 		add(btnNewButton_1);
 		
 		//Informs of minor changes
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Minor Changes");
+		rdbtnNewRadioButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (rdbtnNewRadioButton.isSelected()) {
+					p = 0;		
+					System.out.println(p);
+				}
+			}
+			
+		});
 		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(404, 164, 97, 23);
+
+		rdbtnNewRadioButton.setBounds(404, 164, 147, 23);
+
 		add(rdbtnNewRadioButton);
 		
 		//Informs of major changes
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Major Changes");
+		rdbtnNewRadioButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (rdbtnNewRadioButton_1.isSelected()) {
+					p = 1;		
+					System.out.println(p);
+				}
+			}
+			
+		});
 		buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBounds(404, 192, 97, 23);
+
+		rdbtnNewRadioButton_1.setBounds(404, 192, 147, 23);
+
 		add(rdbtnNewRadioButton_1);
 		
 		//Informs of the paper being accepted
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Accept");
-		buttonGroup_1.add(rdbtnNewRadioButton_2);
-		rdbtnNewRadioButton_2.setBounds(404, 220, 59, 23);
-		add(rdbtnNewRadioButton_2);
+		rdbtnNewRadioButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (rdbtnNewRadioButton_2.isSelected()) {
+					b = 1;		
+					System.out.println(b);
+				}
+			}
+		});
 		
+		buttonGroup_1.add(rdbtnNewRadioButton_2);
+
+		rdbtnNewRadioButton_2.setBounds(603, 207, 106, 23);
+		add(rdbtnNewRadioButton_2);
+
 		//Informs of the paper being rejected
 		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("Reject");
+		rdbtnNewRadioButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (rdbtnNewRadioButton_3.isSelected()) {
+					b = 0;		
+					System.out.println(b);
+				}
+			}
+			
+		});
+
 		buttonGroup_1.add(rdbtnNewRadioButton_3);
-		rdbtnNewRadioButton_3.setBounds(404, 246, 57, 23);
+
+		rdbtnNewRadioButton_3.setBounds(603, 162, 106, 23);
 		add(rdbtnNewRadioButton_3);
+		
+		JButton btnNewButton_2 = new JButton("Submit Response");
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (p > 0 ) {
+					change = "Major Change";
+				}
+				else {
+					change = "Minor Change";
+				}
+				if (b > 0 ) {
+					decision = "Accept";				
+				}
+				else {
+					decision = "Reject";
+				}
+				Response = change + " " + decision ;
+				try {
+					FileWriter writer = new FileWriter("changes.txt", false);
+					BufferedWriter bWriter = new BufferedWriter(writer);
+					bWriter.write(Response);		// write string into text file
+					bWriter.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		
+		btnNewButton_2.setBounds(508, 330, 160, 29);
+		add(btnNewButton_2);
+
 	}
-	
 }
