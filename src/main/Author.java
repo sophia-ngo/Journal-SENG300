@@ -59,7 +59,7 @@ public class Author extends JPanel implements Serializable{
 		filenameTEXT = new JTextField();
 		filenameTEXT.setBackground(new Color(245, 245, 245));
 		filenameTEXT.setFont(new Font("Arial", Font.PLAIN, 12));
-		filenameTEXT.setBounds(634, 381, 267, 26);
+		filenameTEXT.setBounds(667, 381, 267, 26);
 		add(filenameTEXT);
 		filenameTEXT.setColumns(10);
 
@@ -68,7 +68,7 @@ public class Author extends JPanel implements Serializable{
 		lblSuccess.setForeground(new Color(51, 204, 0));
 		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuccess.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblSuccess.setBounds(646, 598, 182, 26);
+		lblSuccess.setBounds(679, 598, 182, 26);
 		add(lblSuccess);
 		lblSuccess.setVisible(false);
 
@@ -80,7 +80,7 @@ public class Author extends JPanel implements Serializable{
 			lblPaper.setText("Paper submitted: None");
 		}
 		lblPaper.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblPaper.setBounds(468, 222, 534, 26);
+		lblPaper.setBounds(501, 222, 534, 26);
 		add(lblPaper);
 
 		// Button for choosing a file
@@ -101,9 +101,10 @@ public class Author extends JPanel implements Serializable{
 				filenameTEXT.setText(filename);
 			}
 		});
-		btnChooseFile.setBounds(911, 378, 41, 29);
+		btnChooseFile.setBounds(944, 378, 41, 29);
 		add(btnChooseFile);
 
+		// Button for download
 		JButton btnDownload = new JButton("Download");
 		btnDownload.setBackground(new Color(245, 245, 245));
 		btnDownload.setFont(new Font("Arial", Font.BOLD, 16));
@@ -118,7 +119,7 @@ public class Author extends JPanel implements Serializable{
 				s1.download();
 			}
 		});
-		btnDownload.setBounds(468, 259, 161, 28);
+		btnDownload.setBounds(501, 259, 161, 28);
 		add(btnDownload);
 
 		// Label for account type
@@ -156,7 +157,7 @@ public class Author extends JPanel implements Serializable{
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setBackground(new Color(245, 245, 245));
 		dateChooser.setFont(new Font("Arial", Font.PLAIN, 16));
-		dateChooser.setBounds(633, 433, 161, 26);
+		dateChooser.setBounds(666, 433, 161, 26);
 		add(dateChooser);
 
 		// Logo icon
@@ -174,7 +175,7 @@ public class Author extends JPanel implements Serializable{
 		add(lblUser);
 
 		// Label for notifications
-		JLabel lblNotification = new JLabel("Notifcations: None");
+		JLabel lblNotification = new JLabel("No notifications");
 		String paper = acc.getUsername() + "1";
 		int numNotifications = 0; // number of notifications
 		// check all submissions for any notifications
@@ -184,7 +185,7 @@ public class Author extends JPanel implements Serializable{
 		}
 		// if notification exists
 		if (count > 0) {
-			lblNotification.setText("Notifications: " + numNotifications + "accepted!");
+			lblNotification.setText(numNotifications + " notifications");
 		}
 		lblNotification.setForeground(Color.BLACK);
 		lblNotification.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -194,23 +195,24 @@ public class Author extends JPanel implements Serializable{
 		// Label for publication deadline
 		JLabel lblPublication = new JLabel("Publication Deadline:");
 		lblPublication.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblPublication.setBounds(468, 433, 155, 26);
+		lblPublication.setBounds(501, 433, 155, 26);
 		add(lblPublication);
 
 		// Label for submit paper title
 		JLabel lblSubmitAPaper = new JLabel("Submit a Paper");
 		lblSubmitAPaper.setFont(new Font("Arial", Font.BOLD, 20));
-		lblSubmitAPaper.setBounds(468, 322, 534, 26);
+		lblSubmitAPaper.setBounds(501, 322, 534, 26);
 		add(lblSubmitAPaper);
 
 		// Label for nominating reviewers
 		JLabel lblNominate = new JLabel("Nominate Reviewers:");
 		lblNominate.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNominate.setBounds(468, 493, 155, 26);
+		lblNominate.setBounds(501, 493, 155, 26);
 		add(lblNominate);
 
 		// Reviewer dropdown menu
 		JComboBox<String> reviewerComboBox = new JComboBox<String>();
+		reviewerComboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		// read accounts.txt
 		try {
 			File file = new File("accounts.txt");
@@ -234,11 +236,12 @@ public class Author extends JPanel implements Serializable{
 		}
 		reviewerComboBox.setBackground(new Color(245, 245, 245));
 		reviewerComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
-		reviewerComboBox.setBounds(634, 493, 146, 26);
+		reviewerComboBox.setBounds(667, 493, 146, 26);
 		add(reviewerComboBox);
 
 		// Button to add/nominate reviewers
 		JButton btnAdd = new JButton(">>");
+		btnAdd.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		DefaultListModel<String> listModel = new DefaultListModel<String>(); // list model to add to Jlist
 		btnAdd.addActionListener(new ActionListener() {
 			@Override
@@ -254,20 +257,22 @@ public class Author extends JPanel implements Serializable{
 		btnAdd.setFont(new Font("Arial", Font.BOLD, 16));
 		btnAdd.setBorder(new LineBorder(new Color(192, 192, 192)));
 		btnAdd.setBackground(new Color(245, 245, 245));
-		btnAdd.setBounds(790, 492, 69, 29);
+		btnAdd.setBounds(823, 492, 69, 29);
 		add(btnAdd);
 
 		// List of reviewers added in box
 		JList reviewerList = new JList(listModel);
+		reviewerList.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		reviewerList.setVisibleRowCount(4);
 		reviewerList.setBackground(new Color(245, 245, 245));
 		reviewerList.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		reviewerList.setBounds(871, 493, 131, 67);
+		reviewerList.setBounds(904, 493, 131, 67);
 		reviewerList.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(reviewerList);
 
 		// Button to remove a nominated reviewer
 		JButton btnRemove = new JButton("<<");
+		btnRemove.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRemove.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -279,7 +284,7 @@ public class Author extends JPanel implements Serializable{
 		btnRemove.setFont(new Font("Arial", Font.BOLD, 16));
 		btnRemove.setBorder(new LineBorder(new Color(192, 192, 192)));
 		btnRemove.setBackground(new Color(245, 245, 245));
-		btnRemove.setBounds(790, 530, 69, 29);
+		btnRemove.setBounds(823, 530, 69, 29);
 		add(btnRemove);
 
 		// Decorative yellow block
@@ -306,7 +311,7 @@ public class Author extends JPanel implements Serializable{
 		// Label for upload
 		JLabel lblUpload = new JLabel("Upload:");
 		lblUpload.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblUpload.setBounds(468, 381, 155, 26);
+		lblUpload.setBounds(501, 381, 155, 26);
 		add(lblUpload);
 
 		// Decorative red header block
@@ -336,7 +341,7 @@ public class Author extends JPanel implements Serializable{
 				lblPaper.setText("Paper submitted: " + s1.getPaperTitle());
 			}
 		});
-		btnSubmit.setBounds(599, 635, 276, 28);
+		btnSubmit.setBounds(632, 635, 276, 28);
 		add(btnSubmit);
 
 	}

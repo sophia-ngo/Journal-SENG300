@@ -19,10 +19,27 @@ public class Submission implements Serializable {
 	// user of submission
 	private String notification; // feedback: major, critical, accept
 	private String reviewerUser;
+	private String comments;
 
+	public String getComments() {
+		return comments;
+	}
+	
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	
+	public String getReviewerUser() {
+		return reviewerUser;
+	}
+	
+	/**
+	 * @param user
+	 */
 	public void setReviewerUser(String user) {
 		this.reviewerUser = user;
 	}
+	
 	//This will get the papertitle and return it
 	public String getPaperTitle() {
 		return paperTitle;
@@ -36,8 +53,12 @@ public class Submission implements Serializable {
 		return list;
 	}
 
-	public String notification() {
+	public String getNotification() {
 		return notification;
+	}
+	
+	public void setNotification(String notification) {
+		this.notification = notification;
 	}
 
 	/**
