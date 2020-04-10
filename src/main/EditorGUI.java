@@ -78,6 +78,7 @@ public class EditorGUI extends JPanel implements Serializable{
 		lblSelectReviewer.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(lblSelectReviewer);
 
+		db.dbLoad();
 		String[] Authors = db.getKeys();
 		JComboBox comboBoxSelectAuthor = new JComboBox(Authors);
 		comboBoxSelectAuthor.setBounds(660, 307, 154, 27);
@@ -126,7 +127,7 @@ public class EditorGUI extends JPanel implements Serializable{
 		lblLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Login panel = new Login(frame, auth, null);
+				Login panel = new Login(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
@@ -228,6 +229,7 @@ public class EditorGUI extends JPanel implements Serializable{
 				String paper = db.getSubmission(x).getPaperTitle();
 				lblSelectPaper.setText("Paper Selected: " + paper);
 				String[] list = db.getSubmission(x).getNomReviewers();
+				comboBoxR.removeAllItems();
 				for(int i = 0; i < list.length; i++) {
 					comboBoxR.addItem(list[i]);
 				}

@@ -63,7 +63,8 @@ public class Author extends JPanel implements Serializable{
 		// Sets paper name if there is one submitted
 		JLabel lblPaper = new JLabel("Paper submitted: ");
 		try {
-			lblPaper.setText("Paper submitted: " + db.dbGet(acc.getUsername()).getPaperTitle());
+			int c_1 = count - 1;
+			lblPaper.setText("Paper submitted: " + db.dbGet(acc.getUsername() + c_1).getPaperTitle());
 		} catch(Exception e) {
 			lblPaper.setText("Paper submitted: None");
 		}
@@ -100,8 +101,8 @@ public class Author extends JPanel implements Serializable{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				db.dbLoad();
-				//int c_1 = count - 1;
-				Submission s1 = db.dbGet(acc.getUsername());
+				int c_1 = count - 1;
+				Submission s1 = db.dbGet(acc.getUsername() + c_1);
 				s1.download();
 			}
 		});
@@ -119,7 +120,7 @@ public class Author extends JPanel implements Serializable{
 		lblLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Login panel = new Login(frame, auth, null);
+				Login panel = new Login(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
@@ -282,11 +283,13 @@ public class Author extends JPanel implements Serializable{
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				if(db == null) {System.out.println("null");}
+				System.out.println("Submit button pressed");
 				db.dbLoad();
 				Submission s1 = new Submission();
 				s1.submit(filenameTEXT.getText(), acc, listModel);
-				db.dbAdd(acc.getUsername(), s1);
-				//count++;
+				db.dbAdd(acc.getUsername() + count, s1);
+				count++;
 				db.dbSave();
 				db.dbLoad();
 				lblSuccess.setVisible(true);
