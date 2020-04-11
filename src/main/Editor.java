@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class EditorGUI extends JPanel implements Serializable{
+public class Editor extends JPanel implements Serializable{
 
 	@SuppressWarnings("resource")
 	public EditorGUI(JFrame frame, Account acc, Authenticator auth, Database db) {
