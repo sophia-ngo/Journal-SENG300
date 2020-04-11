@@ -79,6 +79,7 @@ public class Editor extends JPanel implements Serializable {
 		add(lblSelectReviewer);
 
 		// Combobox to select an author/submission
+		db.dbLoad();
 		String[] authors = db.getKeys(); // array of submissions
 		JComboBox comboBoxSelectAuthor = new JComboBox(authors);
 		comboBoxSelectAuthor.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -130,7 +131,7 @@ public class Editor extends JPanel implements Serializable {
 		lblLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Login panel = new Login(frame, auth, null);
+				Login panel = new Login(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
@@ -222,6 +223,7 @@ public class Editor extends JPanel implements Serializable {
 				String paper = db.getSubmission(x).getPaperTitle(); // gets paper title
 				lblSelectPaper.setText("Paper Selected: " + paper);
 				String[] list = db.getSubmission(x).getNomReviewers(); // gets list of nominated reviewers
+				comboBoxSelectAuthor.removeAllItems();
 				// Adds reviewers to combobox to select reviewer
 				for (int i = 0; i < list.length; i++) {
 					comboBoxSelectReviewer.addItem(list[i]);
