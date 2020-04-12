@@ -1,3 +1,4 @@
+  
 package main;
 
 import java.awt.BorderLayout;
@@ -27,6 +28,7 @@ import java.awt.event.MouseEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
@@ -56,13 +58,7 @@ public class Reviewer extends JPanel {
 		setBackground(Color.WHITE);
 		setLayout(null);
 
-		// Fills combobox with papers
-		String[] papers = db.getReviewerPapers(acc.getUsername());
-		JComboBox comboBoxPapers = new JComboBox(papers);
-		comboBoxPapers.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		comboBoxPapers.setFont(new Font("Arial", Font.PLAIN, 16));
-		comboBoxPapers.setBounds(619, 223, 268, 26);
-		add(comboBoxPapers);
+		
 
 		JTextArea txtComments = new JTextArea("Write your comments here.");
 		txtComments.setLineWrap(true);
@@ -224,7 +220,7 @@ public class Reviewer extends JPanel {
 		lblLogout.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Login panel = new Login(frame, auth, null);
+				Login panel = new Login(frame, auth, db);
 				frame.setContentPane(panel);
 				frame.revalidate();
 			}
@@ -262,26 +258,16 @@ public class Reviewer extends JPanel {
 		lblRedBlock.setBounds(128, 421, 236, 67);
 		add(lblRedBlock);
 
-		// Button for download
-		JButton btnDownload = new JButton("Download");
-		btnDownload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnDownload.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				db.dbLoad();
-				Submission s1 = db.dbGet((String) comboBoxPapers.getSelectedItem()); // get selected paper
-				s1.download();
-			}
-		});
-		btnDownload.setBackground(new Color(245, 245, 245));
-		btnDownload.setFont(new Font("Arial", Font.BOLD, 16));
-		btnDownload.setBorder(new LineBorder(new Color(192, 192, 192)));
-		btnDownload.setBounds(917, 222, 136, 28);
-		add(btnDownload);
+		String[] authors = db.getAuthorKey(acc.getUsername());
+		JComboBox comboBoxAuthors = new JComboBox(authors);
+		comboBoxAuthors.setFont(new Font("Arial", Font.PLAIN, 16));
+		comboBoxAuthors.setBounds(629, 222, 268, 26);
+		add(comboBoxAuthors);
 
-		JLabel lblSelectPaper = new JLabel("Select Paper:");
-		lblSelectPaper.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblSelectPaper.setBounds(501, 223, 108, 26);
-		add(lblSelectPaper);
+		JLabel lblSelectAuthor = new JLabel("Select Author:");
+		lblSelectAuthor.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblSelectAuthor.setBounds(509, 222, 108, 26);
+		add(lblSelectAuthor);
 
 		// Button for submitting all information
 		JButton btnSubmit = new JButton("Submit");
@@ -291,12 +277,26 @@ public class Reviewer extends JPanel {
 		btnSubmit.setBorder(new LineBorder(new Color(192, 192, 192)));
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				
+				try {
+			        // Be sure to supply the path and file name you want.
+			        PrintWriter printwriter = new PrintWriter("comment.txt");
+
+			        String[] lines = txtComments.getText().split("\\n");
+			        for(int i = 0 ; i < lines.length; i++) {
+			            printwriter.println(lines[i]);
+			        }
+			        printwriter.close();
+			    } 
+			    catch (IOException p) {
+			        //Do something with caught exception.
+			    }
 				// Reset success/error messages
 				lblSuccess.setVisible(false);
 				lblNoPaper.setVisible(false);
 				lblNoCategory.setVisible(false);
 
-				String comboBoxItem = (String) comboBoxPapers.getSelectedItem(); // get item from combobox
+				String comboBoxItem = comboBoxAuthors.getSelectedItem().toString(); // get item from combobox
 				Submission paper = db.dbGet(comboBoxItem); // get current paper
 
 				// Checks if paper and button is selected			
@@ -329,6 +329,7 @@ public class Reviewer extends JPanel {
 						|| rdbtnReject.isSelected())) { 
 					lblNoCategory.setVisible(true);
 				}
+				db.dbSave();
 
 //						Response = change + " " + decision;
 //						try {
@@ -348,6 +349,58 @@ public class Reviewer extends JPanel {
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		lblNewLabel.setBounds(917, 366, 147, 22);
 		add(lblNewLabel);
+		
+		// Fills combobox with papers
+		db.dbLoad();
+		System.out.println("Start");
+		db.printDB();
+		System.out.println(acc.getUsername() + " This is the current user");
+		JComboBox comboBoxPapers = new JComboBox();
+		comboBoxPapers.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		comboBoxPapers.setFont(new Font("Arial", Font.PLAIN, 16));
+		comboBoxPapers.setBounds(629, 260, 268, 26);
+		add(comboBoxPapers);
+		
+		JButton btnSelect = new JButton("Select");
+		btnSelect.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String x = comboBoxAuthors.getSelectedItem().toString(); // gets the selected author
+				String paper = db.getSubmission(x).getPaperTitle(); // gets paper title
+				comboBoxPapers.removeAllItems();
+				comboBoxPapers.addItem(paper);
+				frame.revalidate();
+			}
+		});
+		btnSelect.setFont(new Font("Arial", Font.BOLD, 16));
+		btnSelect.setBorder(new LineBorder(new Color(192, 192, 192)));
+		btnSelect.setBackground(new Color(245, 245, 245));
+		btnSelect.setBounds(928, 218, 136, 28);
+		add(btnSelect);
+		
+		JLabel lblSelectPaper_1 = new JLabel("Select Paper:");
+		lblSelectPaper_1.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblSelectPaper_1.setBounds(509, 259, 108, 26);
+		add(lblSelectPaper_1);
+		
+		// Button for download
+		JButton btnDownload = new JButton("Download");
+		btnDownload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDownload.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				db.dbLoad();
+				String[] keys = db.getKeys();
+				String k = comboBoxAuthors.getSelectedItem().toString();
+				Submission s1 = db.dbGet(k); // get selected paper
+				s1.download();
+			}
+		});
+		btnDownload.setBackground(new Color(245, 245, 245));
+		btnDownload.setFont(new Font("Arial", Font.BOLD, 16));
+		btnDownload.setBorder(new LineBorder(new Color(192, 192, 192)));
+		btnDownload.setBounds(928, 258, 136, 28);
+		add(btnDownload);
+		
 
 	}
 }

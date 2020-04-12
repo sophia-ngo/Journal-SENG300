@@ -96,6 +96,13 @@ public class Editor extends JPanel implements Serializable {
 		comboBoxSelectReviewer.setBounds(660, 441, 218, 27);
 		add(comboBoxSelectReviewer);
 
+		JLabel lblRa = new JLabel("Reviewer Assigned!");
+		lblRa.setForeground(new Color(0, 255, 0));
+		lblRa.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblRa.setBounds(689, 549, 153, 28);
+		lblRa.setVisible(false);
+		add(lblRa);
+		
 		// Button for assigning everything
 		JButton btnAssign = new JButton("Assign");
 		btnAssign.setFont(new Font("Arial", Font.BOLD, 16));
@@ -110,6 +117,9 @@ public class Editor extends JPanel implements Serializable {
 				String name = comboBoxSelectReviewer.getSelectedItem().toString(); // get reviewer selected
 				db.getSubmission(x).setReviewerUser(name); // sets the reviewer depending on submission
 				System.out.println("Reviewer: " + name + " Assigned");
+				lblRa.setVisible(true);
+				db.printDB();
+				db.dbSave();
 			}
 		});
 		btnAssign.addActionListener(new ActionListener() {
@@ -219,11 +229,12 @@ public class Editor extends JPanel implements Serializable {
 		btnSelect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				lblRa.setVisible(false);
 				String x = comboBoxSelectAuthor.getSelectedItem().toString(); // gets the selected author
 				String paper = db.getSubmission(x).getPaperTitle(); // gets paper title
 				lblSelectPaper.setText("Paper Selected: " + paper);
 				String[] list = db.getSubmission(x).getNomReviewers(); // gets list of nominated reviewers
-				comboBoxSelectAuthor.removeAllItems();
+				comboBoxSelectReviewer.removeAllItems();
 				// Adds reviewers to combobox to select reviewer
 				for (int i = 0; i < list.length; i++) {
 					comboBoxSelectReviewer.addItem(list[i]);
@@ -233,6 +244,8 @@ public class Editor extends JPanel implements Serializable {
 		});
 		btnSelect.setBounds(900, 303, 108, 29);
 		add(btnSelect);
+		
+		
 
 	}
 }
