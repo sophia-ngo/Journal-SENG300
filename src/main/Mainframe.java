@@ -41,6 +41,7 @@ public class Mainframe {
 		Login panel = new Login(frame, auth, db);
 		frame.setContentPane(panel);
 		frame.revalidate();
+		frame.setResizable(false);
 	}
 
 }

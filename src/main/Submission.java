@@ -44,6 +44,10 @@ public class Submission implements Serializable {
 	public String getPaperTitle() {
 		return paperTitle;
 	}
+	
+	public Account getAuthorAccount() {
+		return authorAccount;
+	}
 
 	//This will get the name of the nominated reviewer
 	public String[] getNomReviewers() {

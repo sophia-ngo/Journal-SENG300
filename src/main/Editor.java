@@ -96,10 +96,11 @@ public class Editor extends JPanel implements Serializable {
 		comboBoxSelectReviewer.setBounds(660, 441, 218, 27);
 		add(comboBoxSelectReviewer);
 
-		JLabel lblRa = new JLabel("Reviewer Assigned!");
-		lblRa.setForeground(new Color(0, 255, 0));
+		JLabel lblRa = new JLabel("Reviewer assigned!");
+		lblRa.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRa.setForeground(new Color(51, 204, 0));
 		lblRa.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblRa.setBounds(689, 549, 153, 28);
+		lblRa.setBounds(660, 545, 196, 28);
 		lblRa.setVisible(false);
 		add(lblRa);
 		
@@ -109,7 +110,7 @@ public class Editor extends JPanel implements Serializable {
 		btnAssign.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		btnAssign.setBackground(new Color(245, 245, 245));
 		btnAssign.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnAssign.setBounds(660, 508, 192, 29);
+		btnAssign.setBounds(664, 584, 192, 29);
 		btnAssign.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

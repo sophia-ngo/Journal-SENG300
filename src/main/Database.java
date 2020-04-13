@@ -91,7 +91,7 @@ public class Database implements Serializable {
 		return subsf;
 
 	}
-	
+
 	public void printDB() {
 		for (String name : files.keySet()) {
 			System.out.println("Author is " + name);
@@ -107,21 +107,21 @@ public class Database implements Serializable {
 	public String[] getAuthorKey(String currentReviewer) {
 		ArrayList<String> tempPapers = new ArrayList<String>();
 		this.dbLoad();
-		for(String key : files.keySet()) {
+		for (String key : files.keySet()) {
 			String author = key;
 			Submission sub = files.get(key);
 			String rew = sub.getReviewerUser();
 			System.out.println(author);
 			System.out.println(rew);
 			try {
-				if(rew.equals(currentReviewer)) {
+				if (rew.equals(currentReviewer)) {
 					tempPapers.add(key);
 				}
-			}catch(Exception e) {
+			} catch (Exception e) {
 				System.out.println("Error");
 				System.out.println(e.getStackTrace());
 			}
-			
+
 		}
 
 		// Array to return papers
@@ -134,6 +134,35 @@ public class Database implements Serializable {
 
 	public Submission getSubmission(String key) {
 		return files.get(key);
+	}
+
+	/**
+	 * @param currentAuthor
+	 * @return
+	 */
+	public String[] getAuthorPapers(String currentAuthor) {
+		ArrayList<String> tempPapers = new ArrayList<String>();
+		this.dbLoad();
+		// for each key in hashmap
+		for (String key : files.keySet()) {
+			Submission sub = files.get(key); // get current submission with given key
+			String user = sub.getAuthorAccount().getUsername(); // gets username of author
+			try {
+				if (user.equals(currentAuthor)) {
+					tempPapers.add(key);
+				}
+			} catch (Exception e) {
+				System.out.println("Error");
+				System.out.println(e.getStackTrace());
+			}
+
+		}
+		// Array to return papers
+		String[] papers = new String[tempPapers.size()];
+		for (int i = 0; i < tempPapers.size(); i++) {
+			papers[i] = tempPapers.get(i);
+		}
+		return papers;
 	}
 
 }

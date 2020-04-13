@@ -23,6 +23,7 @@ import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultListModel;
 
@@ -40,6 +41,7 @@ public class Author extends JPanel implements Serializable {
 	private JTextField filenameTEXT;
 	String filename = null;
 	private int count = 1;
+	private int numNotifications = 0; // number of notifications
 
 	/**
 	 * Author GUI that allows for submission of paper.
@@ -68,20 +70,38 @@ public class Author extends JPanel implements Serializable {
 		lblSuccess.setForeground(new Color(51, 204, 0));
 		lblSuccess.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSuccess.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblSuccess.setBounds(679, 598, 182, 26);
+		lblSuccess.setBounds(632, 598, 272, 26);
 		add(lblSuccess);
 		lblSuccess.setVisible(false);
+
+		// Label for download success
+		JLabel lblDownload = new JLabel("Check current directory for download.");
+		lblDownload.setForeground(new Color(51, 204, 0));
+		lblDownload.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDownload.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblDownload.setBounds(632, 598, 272, 26);
+		add(lblDownload);
+		lblDownload.setVisible(false);
+
+		// Label to nominate at least one reviewer
+		JLabel lblNomReviewer = new JLabel("Please nominate at least one reviewer.");
+		lblNomReviewer.setForeground(new Color(255, 51, 51));
+		lblNomReviewer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNomReviewer.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblNomReviewer.setBounds(632, 598, 272, 26);
+		add(lblNomReviewer);
+		lblNomReviewer.setVisible(false);
 
 		// Sets paper name if there is one submitted
 		JLabel lblPaper = new JLabel("Paper submitted: ");
 		try {
 			int c_1 = count - 1;
-			lblPaper.setText("Paper submitted: " + db.dbGet(acc.getUsername() + c_1).getPaperTitle());
+			lblPaper.setText("Papers submitted:");
 		} catch (Exception e) {
 			lblPaper.setText("Paper submitted: None");
 		}
 		lblPaper.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblPaper.setBounds(501, 222, 534, 26);
+		lblPaper.setBounds(501, 222, 161, 26);
 		add(lblPaper);
 
 		// Button for choosing a file
@@ -105,24 +125,6 @@ public class Author extends JPanel implements Serializable {
 		btnChooseFile.setBounds(944, 378, 41, 29);
 		add(btnChooseFile);
 
-		// Button for download
-		JButton btnDownload = new JButton("Download");
-		btnDownload.setBackground(new Color(245, 245, 245));
-		btnDownload.setFont(new Font("Arial", Font.BOLD, 16));
-		btnDownload.setBorder(new LineBorder(new Color(192, 192, 192)));
-		btnDownload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnDownload.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				db.dbLoad();
-				int c_1 = count - 1;
-				Submission s1 = db.dbGet(acc.getUsername() + c_1);
-				s1.download();
-			}
-		});
-		btnDownload.setBounds(501, 259, 161, 28);
-		add(btnDownload);
-
 		// Label for account type
 		JLabel lblAccountType = new JLabel("Type: Author");
 		lblAccountType.setForeground(Color.BLACK);
@@ -142,7 +144,7 @@ public class Author extends JPanel implements Serializable {
 			}
 		});
 		lblLogout.setForeground(Color.BLACK);
-		lblLogout.setFont(new Font("19ial", Font.PLAIN, 16));
+		lblLogout.setFont(new Font("Arial", Font.PLAIN, 16));
 		lblLogout.setBounds(128, 635, 57, 35);
 		add(lblLogout);
 
@@ -156,6 +158,7 @@ public class Author extends JPanel implements Serializable {
 
 		// Chooses a date
 		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		dateChooser.setBackground(new Color(245, 245, 245));
 		dateChooser.setFont(new Font("Arial", Font.PLAIN, 16));
 		dateChooser.setBounds(666, 433, 161, 26);
@@ -177,16 +180,20 @@ public class Author extends JPanel implements Serializable {
 
 		// Label for notifications
 		JLabel lblNotification = new JLabel("No notifications");
-		String paper = acc.getUsername() + "1";
-		int numNotifications = 0; // number of notifications
+		String[] paper = db.getAuthorPapers(acc.getUsername()); // get list of author papers
 		// check all submissions for any notifications
-		while (paper != null && numNotifications < count) {
-			numNotifications++;
-			paper = acc.getUsername() + numNotifications;
+		for (String currentPaper : paper) {
+			Submission sub = db.getSubmission(currentPaper); // get submission
+			// check if notification exists
+			if (sub.getNotification() != null) {
+				numNotifications++; // count notification
+			}
 		}
 		// if notification exists
-		if (count > 0) {
-			lblNotification.setText(numNotifications + " notifications");
+		if (numNotifications == 1) {
+			lblNotification.setText(1 + " notification!");
+		} else if (numNotifications > 1) {
+			lblNotification.setText(numNotifications + " notifications!");
 		}
 		lblNotification.setForeground(Color.BLACK);
 		lblNotification.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -331,21 +338,86 @@ public class Author extends JPanel implements Serializable {
 		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(db == null) {System.out.println("null");}
-				System.out.println("Submit button pressed");
-				db.dbLoad();
-				Submission s1 = new Submission();
-				s1.submit(filenameTEXT.getText(), acc, listModel);
-				db.dbAdd(acc.getUsername() + count, s1);
-				count++;
-				db.dbSave();
-				db.dbLoad();
-				lblSuccess.setVisible(true);
-				lblPaper.setText("Paper submitted: " + s1.getPaperTitle());
+
+				// Reset success and error messages
+				lblSuccess.setVisible(false);
+				lblNomReviewer.setVisible(false);
+
+				if (listModel.getSize() > 0) {
+					db.dbLoad();
+					Submission s1 = new Submission();
+					s1.submit(filenameTEXT.getText(), acc, listModel);
+					db.dbAdd(acc.getUsername() + count, s1);
+					count++;
+					db.dbSave();
+					db.dbLoad();
+					lblSuccess.setVisible(true);
+				} else if (listModel.getSize() == 0) {
+					lblNomReviewer.setVisible(true);
+				}
 			}
 		});
 		btnSubmit.setBounds(632, 635, 276, 28);
 		add(btnSubmit);
+
+		String[] papers = db.getAuthorPapers(acc.getUsername()); // array of author submission
+		JComboBox papersComboBox = new JComboBox(papers);
+		papersComboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		papersComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+		papersComboBox.setBackground(new Color(245, 245, 245));
+		papersComboBox.setBounds(667, 222, 267, 26);
+		add(papersComboBox);
+
+		JButton btnCheck = new JButton("Check status");
+		btnCheck.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// check if any notifications
+				if (numNotifications > 0) {
+					String selected = (String) papersComboBox.getSelectedItem(); // get selected paper
+					Submission paper = db.getSubmission(selected); // find paper in hashmap
+					// formatting notification and comments
+					String comments = "<html><strong>" + paper.getNotification() + "</strong><html>"
+							+ "<html><body><p style='width: 400px;'>" + paper.getComments() + "</p></body></html>";
+
+					JLabel fillPopUp = new JLabel(comments);
+					fillPopUp.setFont(new Font("Arial", Font.PLAIN, 16));
+
+					JOptionPane.showMessageDialog(null, fillPopUp, paper.getPaperTitle(),
+							JOptionPane.INFORMATION_MESSAGE); // pop up window with comments
+				} else {
+					JLabel fillPopUp = new JLabel("Paper review is in progress.");
+					fillPopUp.setFont(new Font("Arial", Font.PLAIN, 16));
+
+					JOptionPane.showMessageDialog(null, fillPopUp, "In Progress", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		btnCheck.setFont(new Font("Arial", Font.BOLD, 16));
+		btnCheck.setBorder(new LineBorder(new Color(192, 192, 192)));
+		btnCheck.setBackground(new Color(245, 245, 245));
+		btnCheck.setBounds(667, 259, 161, 28);
+		add(btnCheck);
+
+		// Button for download
+		JButton btnDownload = new JButton("Download");
+		btnDownload.setBackground(new Color(245, 245, 245));
+		btnDownload.setFont(new Font("Arial", Font.BOLD, 16));
+		btnDownload.setBorder(new LineBorder(new Color(192, 192, 192)));
+		btnDownload.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnDownload.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				db.dbLoad();
+				String[] keys = db.getKeys();
+				String k = papersComboBox.getSelectedItem().toString();
+				Submission s1 = db.dbGet(k); // get selected paper
+				s1.download();
+				lblDownload.setVisible(true);
+			}
+		});
+		btnDownload.setBounds(838, 259, 161, 28);
+		add(btnDownload);
 
 	}
 }
