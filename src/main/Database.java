@@ -91,21 +91,37 @@ public class Database implements Serializable {
 		return subsf;
 
 	}
+	
+	public void printDB() {
+		for (String name : files.keySet()) {
+			System.out.println("Author is " + name);
+			System.out.println("The paper submitted is " + files.get(name).getPaperTitle());
+			System.out.println("The reviwer assigned is " + files.get(name).getReviewerUser());
+		}
+	}
 
 	/**
 	 * @param currentReviewer is the one that is currently logged in.
 	 * @return
 	 */
-	public String[] getReviewerPapers(String currentReviewer) {
+	public String[] getAuthorKey(String currentReviewer) {
 		ArrayList<String> tempPapers = new ArrayList<String>();
-		String paperTitle;
-		String reviewer;
-		for (String key : files.keySet()) {
-			reviewer = files.get(key).getReviewerUser(); // gets reviewer of paper
-			paperTitle = files.get(key).getPaperTitle(); // gets paper title
-			if (reviewer.equals(currentReviewer)) {
-				tempPapers.add(paperTitle); // add paper title to arraylist
+		this.dbLoad();
+		for(String key : files.keySet()) {
+			String author = key;
+			Submission sub = files.get(key);
+			String rew = sub.getReviewerUser();
+			System.out.println(author);
+			System.out.println(rew);
+			try {
+				if(rew.equals(currentReviewer)) {
+					tempPapers.add(key);
+				}
+			}catch(Exception e) {
+				System.out.println("Error");
+				System.out.println(e.getStackTrace());
 			}
+			
 		}
 
 		// Array to return papers
