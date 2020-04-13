@@ -26,7 +26,6 @@ import javax.swing.ImageIcon;
 public class Reviewer extends JPanel {
 
 	private int p = 0;
-	private int b = 0;
 	private ButtonGroup category = new ButtonGroup(); // button group for category
 
 	/**
@@ -107,7 +106,7 @@ public class Reviewer extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (rdbtnMinor.isSelected()) {
-					p = 0;
+					p = 1;
 					System.out.println(p);
 				}
 			}
@@ -126,7 +125,7 @@ public class Reviewer extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (rdbtnMajor.isSelected()) {
-					p = 1;
+					p = 0;
 					System.out.println(p);
 				}
 			}
@@ -145,8 +144,7 @@ public class Reviewer extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (rdbtnAccept.isSelected()) {
-					b = 1;
-					System.out.println(b);
+					p = 2;
 				}
 			}
 		});
@@ -163,8 +161,7 @@ public class Reviewer extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (rdbtnReject.isSelected()) {
-					b = 0;
-					System.out.println(b);
+					p = 3;
 				}
 			}
 
@@ -291,13 +288,13 @@ public class Reviewer extends JPanel {
 				// Checks if paper and button is selected
 				if (!comboBoxItem.equals("null") && (rdbtnMajor.isSelected() || rdbtnMinor.isSelected()
 						|| rdbtnAccept.isSelected() || rdbtnReject.isSelected())) {
-					if (p == 1) {
+					if (p == 0) {
 						paper.setNotification("Major change");
-					} else if (p == 0){
+					} else if (p == 1){
 						paper.setNotification("Minor change");
-					} else if (b == 1) {
+					} else if (p == 2) {
 						paper.setNotification("Accept");
-					} else if (b == 0){
+					} else if (p == 3){
 						paper.setNotification("Reject");
 					}
 
