@@ -289,9 +289,9 @@ public class Reviewer extends JPanel {
 				if (!comboBoxItem.equals("null") && (rdbtnMajor.isSelected() || rdbtnMinor.isSelected()
 						|| rdbtnAccept.isSelected() || rdbtnReject.isSelected())) {
 					if (p == 0) {
-						paper.setNotification("Major change");
+						paper.setNotification("Major changes");
 					} else if (p == 1){
-						paper.setNotification("Minor change");
+						paper.setNotification("Minor changes");
 					} else if (p == 2) {
 						paper.setNotification("Accept");
 					} else if (p == 3){
