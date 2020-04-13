@@ -1,5 +1,5 @@
 # Journal Submission System
-Project for SENG 300, created by group 2.
+Project for SENG 300, created by group 2.\
 Note: For Mac, paper titles will show up properly. For Windows, the path name will be shown instead.
 
 ## Getting Started
