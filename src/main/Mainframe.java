@@ -34,7 +34,7 @@ public class Mainframe {
 	public Mainframe() {
 		frame = new JFrame();
 		frame.setTitle("UJournal"); // title of window is UJournal
-		frame.setSize(1200, 835);
+		frame.setSize(1200, 800);
 		frame.setLocationRelativeTo(null); // centers screen
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Database db = new Database();

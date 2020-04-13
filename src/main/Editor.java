@@ -218,7 +218,7 @@ public class Editor extends JPanel implements Serializable {
 		// Label for select paper
 		JLabel lblSelectPaper = new JLabel("Paper Selected:");
 		lblSelectPaper.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblSelectPaper.setBounds(503, 369, 375, 26);
+		lblSelectPaper.setBounds(503, 369, 505, 26);
 		add(lblSelectPaper);
 
 		// Button for selecting author
